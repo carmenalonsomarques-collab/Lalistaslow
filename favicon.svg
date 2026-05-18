@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <rect width="32" height="32" rx="6" fill="#1A1612"/>
+  <text x="5" y="23" font-family="'Inter Tight', Inter, sans-serif" font-weight="500" font-size="19" fill="#FBF8F3" letter-spacing="-0.5">L</text>
+  <text x="16.5" y="23" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-weight="400" font-size="17" fill="#B24D3D">S</text>
+</svg>

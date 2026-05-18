@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+
+    <!-- SEO básico -->
+    <title>Lista de Bodas Personalizada y Curada | La Lista Slow</title>
+    <meta name="description" content="Crea una lista de bodas original, sin catálogos ni tendencias. Regalos curados con criterio, diseño editorial y gestión sin estrés. Asesoría de eventos en Madrid.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://lalistaslow.com/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://lalistaslow.com/">
+    <meta property="og:title" content="Lista de Bodas Personalizada y Curada | La Lista Slow">
+    <meta property="og:description" content="Crea una lista de bodas original, sin catálogos ni tendencias. Regalos curados con criterio y diseño editorial.">
+    <meta property="og:image" content="https://lalistaslow.com/og-image.jpg">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:site_name" content="La Lista Slow">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Lista de Bodas Personalizada y Curada | La Lista Slow">
+    <meta name="twitter:description" content="Crea una lista de bodas original, sin catálogos ni tendencias. Regalos curados con criterio y diseño editorial.">
+    <meta name="twitter:image" content="https://lalistaslow.com/og-image.jpg">
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://lalistaslow.com/#organization",
+          "name": "La Lista Slow",
+          "url": "https://lalistaslow.com",
+          "email": "lalistaslow@gmail.com",
+          "description": "Lista de bodas personalizada y asesoría de eventos en Madrid",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Madrid",
+            "addressCountry": "ES"
+          },
+          "sameAs": [
+            "https://www.instagram.com/lalistaslow/",
+            "https://substack.com/@lalistaslow"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://lalistaslow.com/#website",
+          "url": "https://lalistaslow.com",
+          "name": "La Lista Slow",
+          "publisher": { "@id": "https://lalistaslow.com/#organization" }
+        },
+        {
+          "@type": "Service",
+          "provider": { "@id": "https://lalistaslow.com/#organization" },
+          "name": "Lista de bodas personalizada",
+          "description": "Creación de listas de bodas originales y curadas, con diseño editorial y gestión de reservas para invitados.",
+          "areaServed": "España",
+          "serviceType": "Lista de bodas"
+        },
+        {
+          "@type": "Service",
+          "provider": { "@id": "https://lalistaslow.com/#organization" },
+          "name": "Asesoría de eventos online",
+          "description": "Sesión 1:1 online para organizar cualquier tipo de evento con criterio. Estética, proveedores y detalles que marcan la diferencia.",
+          "areaServed": "España",
+          "serviceType": "Asesoría de eventos"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:ital,wght@0,300..700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">La Lista <em>Slow</em></div>
+        <div class="nav-links">
+            <a href="mailto:lalistaslow@gmail.com">Contacto</a>
+            <a href="https://www.instagram.com/lalistaslow/" target="_blank" class="nav-instagram" aria-label="Instagram">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                IG
+            </a>
+            <a href="https://substack.com/@lalistaslow" target="_blank" class="nav-substack">Substack ↗</a>
+        </div>
+        <button class="nav-burger" id="nav-burger" aria-label="Abrir menú" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <div class="nav-mobile" id="nav-mobile" aria-hidden="true">
+        <a href="#filosofia" class="nav-mobile-link"><span class="nav-num">01</span> Filosofía</a>
+        <a href="#como-funciona" class="nav-mobile-link"><span class="nav-num">02</span> Cómo funciona</a>
+        <a href="#demo-list" class="nav-mobile-link"><span class="nav-num">03</span> La Lista</a>
+        <a href="#servicios" class="nav-mobile-link"><span class="nav-num">04</span> Servicios</a>
+        <a href="#quien-soy" class="nav-mobile-link"><span class="nav-num">05</span> Quién soy</a>
+        <div class="nav-mobile-footer">
+            <a href="mailto:lalistaslow@gmail.com">lalistaslow@gmail.com</a>
+            <a href="https://www.instagram.com/lalistaslow/" target="_blank">Instagram ↗</a>
+            <a href="https://substack.com/@lalistaslow" target="_blank">Substack ↗</a>
+        </div>
+    </div>
+
+    <header class="hero">
+        <div class="hero-container">
+<h1>Regalos con alma<br>para bodas slow.</h1>
+            <div class="hero-bottom">
+                <p class="hero-lede">Nada de catálogos. Solo objetos y experiencias que lleváis tiempo queriendo tener en casa.</p>
+                <div class="hero-buttons">
+                    <a href="#como-funciona" class="hero-link">El proceso →</a>
+                    <a href="#demo-list" class="hero-link hero-link--secondary">Ver ejemplo de lista →</a>
+                </div>
+            </div>
+            <div class="hero-meta">
+                <span>↓ Scroll</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Marquee 1 -->
+    <div class="marquee">
+        <div class="marquee-track">
+            <span>Slow living</span><span class="dot">●</span>
+            <span>Marcas con alma</span><span class="dot">●</span>
+            <span>Sin prisas</span><span class="dot">●</span>
+            <span>Con criterio</span><span class="dot">●</span>
+            <span>Belleza con calma</span><span class="dot">●</span>
+            <span>Slow living</span><span class="dot">●</span>
+            <span>Marcas con alma</span><span class="dot">●</span>
+            <span>Sin prisas</span><span class="dot">●</span>
+            <span>Con criterio</span><span class="dot">●</span>
+            <span>Belleza con calma</span><span class="dot">●</span>
+        </div>
+    </div>
+
+    <main>
+        <!-- 01 — Filosofía -->
+        <section id="filosofia" class="section philosophy">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-num">01</span>
+                    <span class="section-subtitle">Nuestra esencia</span>
+                </div>
+                <div class="philosophy-manifiesto reveal">
+                    <h2>No hay catálogos aquí.<br>Hay <em>criterio</em>.</h2>
+                    <div class="philosophy-tags">
+                        <span>Regalos con criterio</span>
+                        <span>Gestión sin estrés</span>
+                        <span>Hecho a tu medida</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 02 — Cómo Funciona -->
+        <section id="como-funciona" class="section how-it-works">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-num">02</span>
+                    <span class="section-subtitle">El proceso</span>
+                </div>
+                <div class="how-it-works-grid">
+                    <div class="how-col reveal">
+                        <span class="how-eyebrow">Para los novios</span>
+                        <h2>Crear es <em>disfrutar</em>.</h2>
+                        <ul class="steps-list">
+                            <li>
+                                <strong>01 — Inspiración</strong>
+                                <p>Buscad juntos objetos o experiencias que queráis en vuestra vida.</p>
+                            </li>
+                            <li>
+                                <strong>02 — Vuestra web</strong>
+                                <p>Montamos una página personalizada con vuestra historia y los regalos que habéis elegido.</p>
+                            </li>
+                            <li>
+                                <strong>03 — Compartir</strong>
+                                <p>Enviad el enlace a los invitados y disfrutad mientras vuestra nueva vida toma forma.</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="how-img-container">
+                        <img src="./tarta_web.png" alt="Lista de bodas personalizada — detalle de tarta nupcial" class="editorial-img">
+                    </div>
+                    <div class="how-col how-guests reveal">
+                        <span class="how-eyebrow">Para los invitados</span>
+                        <h2>Regalar es <em>fácil</em>.</h2>
+                        <ul class="steps-list">
+                            <li>
+                                <strong>01 — Explorar</strong>
+                                <p>Navegan por la web y eligen el detalle que más les ilusione regalaros.</p>
+                            </li>
+                            <li>
+                                <strong>02 — Comprar y entregar</strong>
+                                <p>Van al enlace de la tienda sugerida y realizan la compra, enviándola directamente a la dirección de los novios o entregándola en persona.</p>
+                            </li>
+                            <li>
+                                <strong>03 — Reservar en la lista</strong>
+                                <p>Regresan aquí y marcan el regalo como "Comprado" para evitar que otro invitado lo repita.</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Marquee 2 -->
+        <div class="marquee marquee--alt">
+            <div class="marquee-track">
+                <span>Cerámicas Ortiz</span><span class="dot">●</span>
+                <span>Sha Wellness</span><span class="dot">●</span>
+                <span>Real Fábrica Española</span><span class="dot">●</span>
+                <span>Materia Botánica</span><span class="dot">●</span>
+                <span>El Molín de Mingo</span><span class="dot">●</span>
+                <span>Oura</span><span class="dot">●</span>
+                <span>Cerámicas Ortiz</span><span class="dot">●</span>
+                <span>Sha Wellness</span><span class="dot">●</span>
+                <span>Real Fábrica Española</span><span class="dot">●</span>
+                <span>Materia Botánica</span><span class="dot">●</span>
+            </div>
+        </div>
+
+        <!-- 03 — Lista de Ejemplo -->
+        <section id="demo-list" class="section registry-demo">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-num">03</span>
+                    <span class="section-subtitle">Ejemplo real</span>
+                </div>
+                <div class="registry-header-demo reveal">
+                    <h2>La boda de María <em>y</em> Carlos.</h2>
+                    <p class="registry-intro">Este sería el aspecto final del apartado de regalos. Limpio, minimalista y donde cada detalle importa. Interactúa con él para probar el sistema de reservas.</p>
+
+                    <div class="shipping-info">
+                        <span class="shipping-label">Datos de envío</span>
+                        <p>María Gómez y Carlos Ruiz<br>Calle de las Bodas de Plata 42, 3º Izda.<br>28004 Madrid</p>
+                    </div>
+                </div>
+
+                <div class="gifts-grid" id="gifts-container">
+                    <!-- Dinámico vía JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 04 — Servicios -->
+        <section id="servicios" class="section servicios">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-num">04</span>
+                    <span class="section-subtitle">Lo que ofrezco</span>
+                </div>
+                <div class="servicios-header reveal">
+                    <h2>Más allá de la <em>lista</em>.</h2>
+                    <p class="servicios-intro">Tres formas de trabajar conmigo, según lo que necesites.</p>
+                </div>
+                <div class="servicios-grid">
+                    <!-- Lista de bodas -->
+                    <div class="servicio-card reveal">
+                        <div class="servicio-img-wrap">
+                            <img src="./tarta_web.png" alt="Lista de bodas curada y personalizada — La Lista Slow" class="servicio-img">
+                        </div>
+                        <div class="servicio-content">
+                            <span class="section-subtitle">Lista de bodas</span>
+                            <h3>Tu lista, <em>curada</em>.</h3>
+                            <p>Elaboramos juntas una lista que refleje vuestra forma de vivir. Marcas con criterio, artesanos reales y experiencias que de verdad merezca la pena regalar.</p>
+                            <div class="precios-tabla">
+                                <div class="precio-fila">
+                                    <span class="precio-concepto">Elaboración de la lista</span>
+                                    <span class="precio-valor">170 €</span>
+                                </div>
+                            </div>
+                            <a href="mailto:lalistaslow@gmail.com?subject=Lista%20de%20bodas" class="btn btn-outline">Solicitar información</a>
+                        </div>
+                    </div>
+                    <!-- Asesoría -->
+                    <div class="servicio-card reveal">
+                        <div class="servicio-img-wrap">
+                            <img src="./asesoria_eventos.png" alt="Asesoría de eventos online en Madrid — La Lista Slow" class="servicio-img">
+                        </div>
+                        <div class="servicio-content">
+                            <span class="section-subtitle">Asesoría de eventos</span>
+                            <h3>Asesoría de eventos <em>online</em>.</h3>
+                            <p>Sesión 1:1 para organizar cualquier tipo de evento — sin agobios, con intención. Trabajamos juntas la estética, los proveedores y los detalles que marcan la diferencia.</p>
+                            <p class="sesion-nota">Antes de reservar, escríbeme con al menos 48 horas de antelación. Así llego preparada con inspiración e ideas adaptadas a tu evento.</p>
+                            <div class="precios-tabla">
+                                <div class="precio-fila">
+                                    <span class="precio-concepto">Sesión 90 min</span>
+                                    <span class="precio-valor">40 €</span>
+                                </div>
+                                <div class="precio-fila">
+                                    <span class="precio-concepto">Coordinación integral del evento</span>
+                                    <span class="precio-valor precio-consultar">Consultar</span>
+                                </div>
+                            </div>
+                            <a href="mailto:lalistaslow@gmail.com?subject=Solicitud%20de%20asesor%C3%ADa" class="btn btn-outline">Solicitar sesión</a>
+                        </div>
+                    </div>
+                    <!-- Newsletter — ancho completo -->
+                    <div class="servicio-card servicio-card--newsletter reveal">
+                        <div class="newsletter-inner">
+                            <a href="https://substack.com/@lalistaslow" target="_blank" class="newsletter-brand-link">
+                                <img src="https://substackcdn.com/image/fetch/$s_!7gTn!,w_224,h_224,c_fill,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3caaf2d-695d-4a6e-b0a7-38a33dbe6271_500x500.jpeg" alt="Carmen — La Lista Slow en Substack" class="substack-avatar">
+                                <span class="newsletter-brand-logo">La Lista <em>Slow</em></span>
+                            </a>
+                            <svg class="substack-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="Substack">
+                                <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/>
+                            </svg>
+                            <span class="section-subtitle">Newsletter</span>
+                            <h3>Ideas <em>lentas</em> para celebrar bonito.</h3>
+                            <p>Sitio de inspiración donde comparto marcas, lugares y planes dignos de tu lista de bodas. Sin prisas, en tu buzón.</p>
+                            <a href="https://substack.com/@lalistaslow" target="_blank" class="btn btn-primary">Leer en Substack ↗</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05 — Quién Soy -->
+        <section id="quien-soy" class="section quien-soy">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-num">05</span>
+                    <span class="section-subtitle">Quién soy</span>
+                </div>
+                <div class="quien-soy-grid reveal">
+                    <div class="quien-soy-aside">
+                        <h2>Soy <em>Carmen</em>.</h2>
+                    </div>
+                    <div class="quien-soy-body">
+                        <p class="quien-soy-lead">No me gusta usar la palabra <em>apasionada</em>, pero aún no he encontrado una mejor.</p>
+                        <div class="quien-soy-cols">
+                            <p>Me encanta buscar y descubrir marcas, lugares y planes bonitos. Leer revistas es uno de mis hobbies favoritos, al igual que hacer scroll en Instagram en cuentas que me inspiran. Algunos pensarán que es perder el tiempo, pero estoy segura de que tú, que estás aquí, me entiendes.</p>
+                            <p>Estudié Turismo y los primeros años de mi carrera los dediqué a la gestión de hoteles. Después, tras varios másteres y cursos, supe a qué quería dedicarme de verdad: la planificación y gestión de eventos.</p>
+                        </div>
+                        <p class="quien-soy-highlight">Antes organizaba eventos en un gran hotel en Madrid. Ahora organizo cumpleaños infantiles —los de mis hijos—. Pero nunca es tarde para retomar aquello que de verdad <em>te apasiona</em>.</p>
+                        <a href="mailto:lalistaslow@gmail.com" class="btn btn-outline" style="margin-top: 2.5rem;">Hablemos ↗</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal Reserva -->
+    <div id="reservation-modal" class="modal hidden">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <span class="section-subtitle">Confirmación</span>
+            <h3 id="modal-title" class="font-serif">Confirmar Compra</h3>
+            <p id="modal-desc">Marca este regalo solo si ya te has encargado de comprarlo en la tienda para que se envíe a los novios. Así evitaremos que lo vuelvan a comprar.</p>
+
+            <form id="reservation-form">
+                <input type="hidden" id="gift-id" value="">
+
+                <div class="form-group">
+                    <label for="guest-message">Mensaje para los novios (opcional)</label>
+                    <textarea id="guest-message" rows="3" placeholder="Os deseamos toda la felicidad del mundo..."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Sí, ya lo he comprado</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Newsletter capture -->
+    <section class="nl-capture">
+        <div class="container">
+            <div class="nl-capture-inner">
+                <div class="nl-capture-text">
+                    <span class="nl-eyebrow">Newsletter</span>
+                    <h2 class="nl-titulo">Ideas <em>lentas</em> para celebrar bonito.</h2>
+                    <p class="nl-sub">Una vez al mes. Sin ruido. Solo lo que merece tu atención.</p>
+                </div>
+                <form class="nl-form" onsubmit="abrirSubstack(event)">
+                    <div class="nl-input-row">
+                        <input type="email" id="nl-email" placeholder="tu@email.com" required autocomplete="email">
+                        <button type="submit">Suscribirme</button>
+                    </div>
+                    <p class="nl-legal">Sin spam. Baja cuando quieras.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="logo-footer">La Lista <em>Slow</em></div>
+                    <p class="footer-tagline">Una manera diferente de regalar.<br>Hecho con calma en Madrid.</p>
+                </div>
+                <div class="footer-nav">
+                    <span class="footer-nav-title">Índice</span>
+                    <a href="#filosofia">01 Filosofía</a>
+                    <a href="#como-funciona">02 Cómo funciona</a>
+                    <a href="#demo-list">03 La Lista</a>
+                    <a href="#servicios">04 Servicios</a>
+                    <a href="#quien-soy">05 Quién soy</a>
+                </div>
+                <div class="footer-nav">
+                    <span class="footer-nav-title">En otra parte</span>
+                    <a href="https://www.instagram.com/lalistaslow/" target="_blank">Instagram ↗</a>
+                    <a href="https://substack.com/@lalistaslow" target="_blank">Substack ↗</a>
+                    <a href="mailto:lalistaslow@gmail.com">lalistaslow@gmail.com</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>Issue Nº 01 — Primavera 2026</span>
+                <span class="footer-legal-links">
+                    <a href="./aviso-legal.html">Aviso legal</a>
+                    <a href="./privacidad.html">Privacidad</a>
+                </span>
+                <span>© La Lista Slow · Madrid</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./app.js"></script>
+    <script>
+        function abrirSubstack(e) {
+            e.preventDefault();
+            window.open('https://substack.com/@lalistaslow', '_blank');
+        }
+
+        // Navbar scroll
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('is-scrolled', window.scrollY > 60);
+        }, { passive: true });
+
+        // Mobile nav
+        const burger = document.getElementById('nav-burger');
+        const mobileNav = document.getElementById('nav-mobile');
+
+        burger.addEventListener('click', () => {
+            const isOpen = mobileNav.classList.toggle('is-open');
+            burger.classList.toggle('is-open', isOpen);
+            burger.setAttribute('aria-expanded', isOpen);
+            mobileNav.setAttribute('aria-hidden', !isOpen);
+            document.body.style.overflow = isOpen ? 'hidden' : '';
+        });
+
+        mobileNav.querySelectorAll('.nav-mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('is-open');
+                burger.classList.remove('is-open');
+                burger.setAttribute('aria-expanded', false);
+                mobileNav.setAttribute('aria-hidden', true);
+                document.body.style.overflow = '';
+            });
+        });
+    </script>
+</body>
+</html>
