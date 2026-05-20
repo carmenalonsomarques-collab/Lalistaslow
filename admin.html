@@ -336,6 +336,10 @@
                 .replace(/[^a-z0-9-]/g, '');
         }
 
+        function generarPin() {
+            return Math.random().toString(36).substring(2, 8).toUpperCase();
+        }
+
         async function crearLista() {
             const nombre = document.getElementById('nl-nombre').value.trim();
             const fecha = document.getElementById('nl-fecha').value;
@@ -347,10 +351,13 @@
 
             if (!nombre || !slug) { errEl.textContent = 'El nombre y el slug son obligatorios.'; errEl.style.display = 'block'; return; }
 
+            const pin = generarPin();
+
             const { error } = await db.from('listas').insert({
                 nombre_pareja: nombre,
                 fecha_boda: fecha || null,
                 slug,
+                pin_novios: pin,
                 activa: true
             });
 
@@ -359,7 +366,7 @@
                 errEl.style.display = 'block';
             } else {
                 const origin = window.location.origin;
-                sucEl.innerHTML = `Lista creada. <a href="${origin}/lista.html?id=${slug}" target="_blank" style="color:var(--color-terracota)">Ver lista ↗</a>`;
+                sucEl.innerHTML = `Lista creada. PIN de los novios: <strong>${pin}</strong> · <a href="${origin}/lista.html?id=${slug}" target="_blank" style="color:var(--color-terracota)">Ver lista ↗</a>`;
                 sucEl.style.display = 'block';
                 document.getElementById('nl-nombre').value = '';
                 document.getElementById('nl-fecha').value = '';
