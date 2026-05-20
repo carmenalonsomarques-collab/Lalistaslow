@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vuestra lista | La Lista Slow</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:ital,wght@0,300..700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+    <style>
+        .novios-page { min-height: 100vh; background: var(--color-cream); padding: 100px 0 80px; }
+        .novios-header { max-width: 900px; margin: 0 auto; padding: 0 24px 48px; border-bottom: 1px solid var(--color-linen); margin-bottom: 48px; }
+        .novios-eyebrow { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-sand); margin-bottom: 16px; }
+        .novios-titulo { font-family: 'Inter Tight', sans-serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 500; letter-spacing: -0.03em; color: var(--color-dark); line-height: 1.1; margin-bottom: 12px; }
+        .novios-titulo em { font-family: 'Instrument Serif', serif; font-style: italic; color: var(--color-terracota); }
+        .novios-fecha { font-family: 'Inter', sans-serif; font-size: 0.9rem; color: var(--color-sand); margin-bottom: 0; }
+
+        /* Resumen estadísticas */
+        .novios-stats { max-width: 900px; margin: 0 auto 48px; padding: 0 24px; display: flex; gap: 24px; flex-wrap: wrap; }
+        .stat-box { flex: 1; min-width: 140px; background: #fff; border: 1px solid var(--color-linen); padding: 24px; text-align: center; }
+        .stat-numero { font-family: 'Inter Tight', sans-serif; font-size: 2.5rem; font-weight: 500; letter-spacing: -0.04em; color: var(--color-dark); line-height: 1; margin-bottom: 8px; }
+        .stat-numero.terracota { color: var(--color-terracota); }
+        .stat-label { font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-sand); }
+
+        /* Enlace de invitados */
+        .share-box { max-width: 900px; margin: 0 auto 48px; padding: 0 24px; }
+        .share-inner { background: var(--color-linen); padding: 24px 28px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+        .share-label { font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 500; color: var(--color-dark); flex-shrink: 0; }
+        .share-url { font-family: 'Inter', sans-serif; font-size: 0.85rem; color: var(--color-sand); flex: 1; min-width: 200px; word-break: break-all; }
+        .btn-copy { padding: 10px 20px; font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 500; border: 1px solid var(--color-dark); background: transparent; color: var(--color-dark); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+        .btn-copy:hover { background: var(--color-dark); color: var(--color-cream); }
+        .btn-copy.copied { border-color: var(--color-terracota); color: var(--color-terracota); }
+
+        /* Lista de regalos */
+        .novios-grid { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+        .regalo-row { display: grid; grid-template-columns: 80px 1fr auto; gap: 20px; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--color-linen); }
+        .regalo-row:last-child { border-bottom: none; }
+        .regalo-thumb { width: 80px; height: 80px; object-fit: cover; display: block; background: var(--color-linen); }
+        .regalo-thumb-placeholder { width: 80px; height: 80px; background: var(--color-linen); flex-shrink: 0; }
+        .regalo-info { min-width: 0; }
+        .regalo-titulo { font-family: 'Inter Tight', sans-serif; font-size: 0.95rem; font-weight: 500; color: var(--color-dark); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .regalo-tienda { font-family: 'Inter', sans-serif; font-size: 0.8rem; color: var(--color-sand); }
+        .regalo-invitado { font-family: 'Inter', sans-serif; font-size: 0.8rem; color: var(--color-terracota); margin-top: 4px; }
+        .regalo-badge { display: inline-block; font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 12px; white-space: nowrap; }
+        .badge-disponible { background: var(--color-linen); color: var(--color-sand); }
+        .badge-reservado { background: #FFF3CD; color: #856404; }
+        .badge-comprado { background: #D1E7DD; color: #0A3622; }
+
+        .loading { text-align: center; padding: 80px 24px; font-family: 'Inter', sans-serif; color: var(--color-sand); }
+        .error-msg { text-align: center; padding: 80px 24px; font-family: 'Inter', sans-serif; color: var(--color-sand); }
+        .empty-msg { text-align: center; padding: 60px 24px; font-family: 'Inter', sans-serif; font-size: 0.9rem; color: var(--color-sand); }
+
+        @media (max-width: 600px) {
+            .novios-stats { gap: 12px; }
+            .stat-box { min-width: 100px; padding: 16px; }
+            .stat-numero { font-size: 2rem; }
+            .regalo-row { grid-template-columns: 60px 1fr auto; gap: 12px; }
+            .regalo-thumb, .regalo-thumb-placeholder { width: 60px; height: 60px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar is-scrolled">
+        <a href="./index.html" class="logo">La Lista <em>Slow</em></a>
+    </nav>
+
+    <main class="novios-page">
+        <div id="loading" class="loading">Cargando vuestra lista...</div>
+        <div id="error" class="error-msg" style="display:none">Esta lista no está disponible.</div>
+
+        <div id="contenido" style="display:none">
+            <div class="novios-header">
+                <p class="novios-eyebrow">Vuestra lista</p>
+                <h1 class="novios-titulo" id="titulo-lista"></h1>
+                <p class="novios-fecha" id="fecha-lista"></p>
+            </div>
+
+            <div class="novios-stats">
+                <div class="stat-box">
+                    <div class="stat-numero" id="stat-total">—</div>
+                    <div class="stat-label">Regalos</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-numero" id="stat-disponibles">—</div>
+                    <div class="stat-label">Disponibles</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-numero" id="stat-reservados">—</div>
+                    <div class="stat-label">Reservados</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-numero terracota" id="stat-comprados">—</div>
+                    <div class="stat-label">Comprados</div>
+                </div>
+            </div>
+
+            <div class="share-box">
+                <div class="share-inner">
+                    <span class="share-label">Enlace para invitados</span>
+                    <span class="share-url" id="share-url">—</span>
+                    <button class="btn-copy" id="btn-copy" onclick="copiarEnlace()">Copiar</button>
+                </div>
+            </div>
+
+            <div class="novios-grid" id="regalos-lista">
+                <div class="empty-msg">Cargando regalos...</div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const SUPABASE_URL = 'https://sryhsquvugxclgkygkxi.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_VlOuR2N2xgWCrjzOWRkNVA_d1Z6bQtd';
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        const slug = new URLSearchParams(window.location.search).get('id');
+        let listaSlug = '';
+
+        async function cargarLista() {
+            if (!slug) { mostrarError(); return; }
+
+            const { data: lista, error } = await supabase
+                .from('listas')
+                .select('*')
+                .eq('slug', slug)
+                .eq('activa', true)
+                .single();
+
+            if (error || !lista) { mostrarError(); return; }
+
+            listaSlug = lista.slug;
+            document.title = `Lista de ${lista.nombre_pareja} | La Lista Slow`;
+            document.getElementById('titulo-lista').innerHTML = `La lista de <em>${lista.nombre_pareja}</em>.`;
+            if (lista.fecha_boda) {
+                const fecha = new Date(lista.fecha_boda).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+                document.getElementById('fecha-lista').textContent = fecha;
+            }
+
+            const origin = window.location.origin;
+            const enlaceInvitados = `${origin}/lista.html?id=${lista.slug}`;
+            document.getElementById('share-url').textContent = enlaceInvitados;
+
+            const { data: regalos } = await supabase
+                .from('regalos')
+                .select('*')
+                .eq('lista_id', lista.id)
+                .order('orden');
+
+            const { data: reservas } = await supabase
+                .from('reservas')
+                .select('*');
+
+            const regalosData = regalos || [];
+            const reservasData = reservas || [];
+
+            actualizarStats(regalosData, reservasData);
+            renderRegalos(regalosData, reservasData);
+
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('contenido').style.display = 'block';
+        }
+
+        function getEstado(regaloid, reservasData) {
+            const reserva = reservasData.find(r => r.regalo_id === regaloid);
+            if (!reserva) return { estado: 'disponible', reserva: null };
+            return { estado: reserva.estado, reserva };
+        }
+
+        function actualizarStats(regalos, reservas) {
+            const total = regalos.length;
+            let comprados = 0, reservados = 0;
+            regalos.forEach(r => {
+                const { estado } = getEstado(r.id, reservas);
+                if (estado === 'comprado') comprados++;
+                else if (estado === 'reservado') reservados++;
+            });
+            const disponibles = total - comprados - reservados;
+            document.getElementById('stat-total').textContent = total;
+            document.getElementById('stat-disponibles').textContent = disponibles;
+            document.getElementById('stat-reservados').textContent = reservados;
+            document.getElementById('stat-comprados').textContent = comprados;
+        }
+
+        function renderRegalos(regalos, reservas) {
+            const lista = document.getElementById('regalos-lista');
+            if (!regalos.length) {
+                lista.innerHTML = '<div class="empty-msg">Todavía no hay regalos en esta lista.</div>';
+                return;
+            }
+            lista.innerHTML = '';
+            regalos.forEach(regalo => {
+                const { estado, reserva } = getEstado(regalo.id, reservas);
+                const badgeClass = `badge-${estado}`;
+                const badgeText = estado === 'disponible' ? 'Disponible' : estado === 'reservado' ? 'Reservado' : 'Comprado ✓';
+                const invitadoHTML = reserva ? `<p class="regalo-invitado">${reserva.nombre_invitado}</p>` : '';
+                const imgHTML = regalo.imagen
+                    ? `<img src="${regalo.imagen}" alt="${regalo.titulo}" class="regalo-thumb" loading="lazy">`
+                    : `<div class="regalo-thumb-placeholder"></div>`;
+
+                const row = document.createElement('div');
+                row.className = 'regalo-row';
+                row.innerHTML = `
+                    ${imgHTML}
+                    <div class="regalo-info">
+                        <p class="regalo-titulo">${regalo.titulo}</p>
+                        <p class="regalo-tienda">${regalo.tienda || ''}</p>
+                        ${invitadoHTML}
+                    </div>
+                    <span class="regalo-badge ${badgeClass}">${badgeText}</span>`;
+                lista.appendChild(row);
+            });
+        }
+
+        function copiarEnlace() {
+            const url = document.getElementById('share-url').textContent;
+            navigator.clipboard.writeText(url).then(() => {
+                const btn = document.getElementById('btn-copy');
+                btn.textContent = 'Copiado';
+                btn.classList.add('copied');
+                setTimeout(() => { btn.textContent = 'Copiar'; btn.classList.remove('copied'); }, 2000);
+            });
+        }
+
+        function mostrarError() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('error').style.display = 'block';
+        }
+
+        cargarLista();
+    </script>
+</body>
+</html>

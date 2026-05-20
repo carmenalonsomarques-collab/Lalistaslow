@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Bodas | La Lista Slow</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:ital,wght@0,300..700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+    <style>
+        .lista-page { min-height: 100vh; background: var(--color-cream); padding: 100px 0 80px; }
+        .lista-header { max-width: 900px; margin: 0 auto; padding: 0 24px 48px; border-bottom: 1px solid var(--color-linen); margin-bottom: 48px; }
+        .lista-eyebrow { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-sand); margin-bottom: 16px; }
+        .lista-titulo { font-family: 'Inter Tight', sans-serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 500; letter-spacing: -0.03em; color: var(--color-dark); line-height: 1.1; margin-bottom: 12px; }
+        .lista-titulo em { font-family: 'Instrument Serif', serif; font-style: italic; color: var(--color-terracota); }
+        .lista-fecha { font-family: 'Inter', sans-serif; font-size: 0.9rem; color: var(--color-sand); }
+        .lista-grid { max-width: 900px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
+        .regalo-card { background: #fff; border: 1px solid var(--color-linen); overflow: hidden; transition: transform 0.2s; }
+        .regalo-card:hover { transform: translateY(-2px); }
+        .regalo-card.is-comprado { opacity: 0.6; }
+        .regalo-img { width: 100%; height: 200px; object-fit: cover; display: block; }
+        .regalo-body { padding: 20px; }
+        .regalo-estado { display: inline-block; font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 10px; margin-bottom: 12px; }
+        .regalo-estado.disponible { background: var(--color-linen); color: var(--color-sand); }
+        .regalo-estado.reservado { background: #FFF3CD; color: #856404; }
+        .regalo-estado.comprado { background: #D1E7DD; color: #0A3622; }
+        .regalo-titulo { font-family: 'Inter Tight', sans-serif; font-size: 1rem; font-weight: 500; color: var(--color-dark); margin-bottom: 8px; }
+        .regalo-desc { font-family: 'Inter', sans-serif; font-size: 0.85rem; color: var(--color-sand); line-height: 1.6; margin-bottom: 16px; }
+        .regalo-tienda { display: inline-block; font-family: 'Inter', sans-serif; font-size: 0.8rem; color: var(--color-terracota); text-decoration: none; margin-bottom: 16px; }
+        .regalo-tienda:hover { text-decoration: underline; }
+        .btn-reservar { width: 100%; padding: 12px; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 500; border: 1px solid var(--color-dark); background: transparent; color: var(--color-dark); cursor: pointer; transition: all 0.2s; }
+        .btn-reservar:hover { background: var(--color-dark); color: var(--color-cream); }
+        .btn-reservar:disabled { opacity: 0.4; cursor: not-allowed; }
+        .btn-comprado { width: 100%; padding: 12px; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 500; border: 1px solid var(--color-terracota); background: transparent; color: var(--color-terracota); cursor: pointer; transition: all 0.2s; }
+        .btn-comprado:hover { background: var(--color-terracota); color: #fff; }
+        /* Modal */
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(26,22,18,0.6); z-index: 1000; align-items: center; justify-content: center; padding: 24px; }
+        .modal-overlay.active { display: flex; }
+        .modal-box { background: var(--color-cream); max-width: 440px; width: 100%; padding: 40px; }
+        .modal-titulo { font-family: 'Inter Tight', sans-serif; font-size: 1.3rem; font-weight: 500; color: var(--color-dark); margin-bottom: 8px; }
+        .modal-sub { font-family: 'Inter', sans-serif; font-size: 0.9rem; color: var(--color-sand); margin-bottom: 28px; }
+        .modal-label { display: block; font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 500; color: var(--color-dark); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .modal-input { width: 100%; padding: 12px; border: 1px solid var(--color-linen); background: #fff; font-family: 'Inter', sans-serif; font-size: 0.9rem; color: var(--color-dark); box-sizing: border-box; margin-bottom: 20px; }
+        .modal-input:focus { outline: none; border-color: var(--color-dark); }
+        .modal-actions { display: flex; gap: 12px; }
+        .btn-modal-cancel { flex: 1; padding: 12px; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 500; border: 1px solid var(--color-linen); background: transparent; color: var(--color-sand); cursor: pointer; }
+        .btn-modal-ok { flex: 2; padding: 12px; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 500; border: none; background: var(--color-dark); color: var(--color-cream); cursor: pointer; }
+        .loading { text-align: center; padding: 80px 24px; font-family: 'Inter', sans-serif; color: var(--color-sand); }
+        .error-msg { text-align: center; padding: 80px 24px; font-family: 'Inter', sans-serif; color: var(--color-sand); }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar is-scrolled">
+        <a href="./index.html" class="logo">La Lista <em>Slow</em></a>
+    </nav>
+
+    <main class="lista-page">
+        <div id="loading" class="loading">Cargando lista...</div>
+        <div id="error" class="error-msg" style="display:none">Esta lista no está disponible.</div>
+
+        <div id="contenido" style="display:none">
+            <div class="lista-header" style="max-width:900px;margin:0 auto;padding:0 24px 48px;">
+                <p class="lista-eyebrow">Lista de bodas</p>
+                <h1 class="lista-titulo" id="titulo-lista"></h1>
+                <p class="lista-fecha" id="fecha-lista"></p>
+            </div>
+            <div class="lista-grid" id="regalos-grid"></div>
+        </div>
+    </main>
+
+    <!-- Modal reservar -->
+    <div class="modal-overlay" id="modal-reservar">
+        <div class="modal-box">
+            <p class="modal-titulo">Me lo quedo</p>
+            <p class="modal-sub" id="modal-reservar-nombre-regalo"></p>
+            <label class="modal-label">Tu nombre</label>
+            <input class="modal-input" id="input-nombre" type="text" placeholder="Ana García" autocomplete="name">
+            <div class="modal-actions">
+                <button class="btn-modal-cancel" onclick="cerrarModal('modal-reservar')">Cancelar</button>
+                <button class="btn-modal-ok" onclick="confirmarReserva()">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal marcar comprado -->
+    <div class="modal-overlay" id="modal-comprado">
+        <div class="modal-box">
+            <p class="modal-titulo">¿Ya lo compraste?</p>
+            <p class="modal-sub" id="modal-comprado-nombre-regalo"></p>
+            <p style="font-family:'Inter',sans-serif;font-size:0.9rem;color:var(--color-sand);margin-bottom:28px;">Márcalo como comprado para que los demás invitados lo vean.</p>
+            <div class="modal-actions">
+                <button class="btn-modal-cancel" onclick="cerrarModal('modal-comprado')">Cancelar</button>
+                <button class="btn-modal-ok" onclick="confirmarComprado()">Ya lo compré</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const SUPABASE_URL = 'https://sryhsquvugxclgkygkxi.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_VlOuR2N2xgWCrjzOWRkNVA_d1Z6bQtd';
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        const slug = new URLSearchParams(window.location.search).get('id');
+        let regalosData = [];
+        let reservasData = [];
+        let regalosSeleccionado = null;
+
+        async function cargarLista() {
+            if (!slug) { mostrarError(); return; }
+
+            const { data: lista, error } = await supabase
+                .from('listas')
+                .select('*')
+                .eq('slug', slug)
+                .eq('activa', true)
+                .single();
+
+            if (error || !lista) { mostrarError(); return; }
+
+            document.title = `Lista de ${lista.nombre_pareja} | La Lista Slow`;
+            document.getElementById('titulo-lista').innerHTML = `La lista de <em>${lista.nombre_pareja}</em>.`;
+            if (lista.fecha_boda) {
+                const fecha = new Date(lista.fecha_boda).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+                document.getElementById('fecha-lista').textContent = fecha;
+            }
+
+            const { data: regalos } = await supabase
+                .from('regalos')
+                .select('*')
+                .eq('lista_id', lista.id)
+                .order('orden');
+
+            const { data: reservas } = await supabase
+                .from('reservas')
+                .select('*, regalos(lista_id)')
+                .eq('regalos.lista_id', lista.id);
+
+            regalosData = regalos || [];
+            reservasData = reservas || [];
+
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('contenido').style.display = 'block';
+            renderRegalos();
+        }
+
+        function getEstadoRegalo(regaloid) {
+            const reserva = reservasData.find(r => r.regalo_id === regaloid);
+            if (!reserva) return { estado: 'disponible', reserva: null };
+            return { estado: reserva.estado, reserva };
+        }
+
+        function renderRegalos() {
+            const grid = document.getElementById('regalos-grid');
+            grid.innerHTML = '';
+
+            regalosData.forEach(regalo => {
+                const { estado, reserva } = getEstadoRegalo(regalo.id);
+                const card = document.createElement('div');
+                card.className = `regalo-card${estado === 'comprado' ? ' is-comprado' : ''}`;
+
+                let estadoHTML = '';
+                if (estado === 'disponible') estadoHTML = `<span class="regalo-estado disponible">Disponible</span>`;
+                else if (estado === 'reservado') estadoHTML = `<span class="regalo-estado reservado">Reservado por ${reserva.nombre_invitado}</span>`;
+                else estadoHTML = `<span class="regalo-estado comprado">Comprado ✓</span>`;
+
+                let btnHTML = '';
+                if (estado === 'disponible') {
+                    btnHTML = `<button class="btn-reservar" onclick="abrirReservar('${regalo.id}', '${regalo.titulo.replace(/'/g, "\\'")}')">Me lo quedo</button>`;
+                } else if (estado === 'reservado') {
+                    btnHTML = `<button class="btn-comprado" onclick="abrirComprado('${regalo.id}', '${regalo.titulo.replace(/'/g, "\\'")}')">Ya lo compré</button>`;
+                } else {
+                    btnHTML = `<button class="btn-reservar" disabled>Comprado</button>`;
+                }
+
+                card.innerHTML = `
+                    ${regalo.imagen ? `<img src="${regalo.imagen}" alt="${regalo.titulo}" class="regalo-img" loading="lazy">` : ''}
+                    <div class="regalo-body">
+                        ${estadoHTML}
+                        <p class="regalo-titulo">${regalo.titulo}</p>
+                        ${regalo.descripcion ? `<p class="regalo-desc">${regalo.descripcion}</p>` : ''}
+                        ${regalo.enlace_tienda ? `<a href="${regalo.enlace_tienda}" target="_blank" class="regalo-tienda">${regalo.tienda || 'Ver en tienda'} ↗</a>` : ''}
+                        ${btnHTML}
+                    </div>`;
+                grid.appendChild(card);
+            });
+        }
+
+        function abrirReservar(id, titulo) {
+            regalosSeleccionado = id;
+            document.getElementById('modal-reservar-nombre-regalo').textContent = titulo;
+            document.getElementById('input-nombre').value = '';
+            document.getElementById('modal-reservar').classList.add('active');
+        }
+
+        function abrirComprado(id, titulo) {
+            regalosSeleccionado = id;
+            document.getElementById('modal-comprado-nombre-regalo').textContent = titulo;
+            document.getElementById('modal-comprado').classList.add('active');
+        }
+
+        function cerrarModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        async function confirmarReserva() {
+            const nombre = document.getElementById('input-nombre').value.trim();
+            if (!nombre) { alert('Escribe tu nombre.'); return; }
+
+            const btn = document.querySelector('#modal-reservar .btn-modal-ok');
+            btn.textContent = 'Guardando...';
+            btn.disabled = true;
+
+            const { error } = await supabase.from('reservas').insert({
+                regalo_id: regalosSeleccionado,
+                nombre_invitado: nombre,
+                estado: 'reservado'
+            });
+
+            if (error) { alert('Error al guardar. Inténtalo de nuevo.'); }
+            else {
+                cerrarModal('modal-reservar');
+                await recargarReservas();
+                renderRegalos();
+            }
+            btn.textContent = 'Confirmar';
+            btn.disabled = false;
+        }
+
+        async function confirmarComprado() {
+            const btn = document.querySelector('#modal-comprado .btn-modal-ok');
+            btn.textContent = 'Guardando...';
+            btn.disabled = true;
+
+            const reserva = reservasData.find(r => r.regalo_id === regalosSeleccionado);
+            if (reserva) {
+                await supabase.from('reservas').update({ estado: 'comprado' }).eq('id', reserva.id);
+            }
+            cerrarModal('modal-comprado');
+            await recargarReservas();
+            renderRegalos();
+            btn.textContent = 'Ya lo compré';
+            btn.disabled = false;
+        }
+
+        async function recargarReservas() {
+            const { data } = await supabase.from('reservas').select('*');
+            reservasData = data || [];
+        }
+
+        function mostrarError() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('error').style.display = 'block';
+        }
+
+        cargarLista();
+    </script>
+</body>
+</html>

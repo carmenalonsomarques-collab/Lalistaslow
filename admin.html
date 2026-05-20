@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel | La Lista Slow</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:ital,wght@0,300..700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+    <style>
+        body { background: var(--color-cream); }
+
+        /* Login */
+        .login-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+        .login-box { background: #fff; border: 1px solid var(--color-linen); padding: 48px 40px; max-width: 400px; width: 100%; }
+        .login-titulo { font-family: 'Inter Tight', sans-serif; font-size: 1.5rem; font-weight: 500; letter-spacing: -0.03em; color: var(--color-dark); margin-bottom: 8px; }
+        .login-sub { font-family: 'Inter', sans-serif; font-size: 0.85rem; color: var(--color-sand); margin-bottom: 32px; }
+        .form-label { display: block; font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: var(--color-dark); margin-bottom: 8px; }
+        .form-input { width: 100%; padding: 12px; border: 1px solid var(--color-linen); background: var(--color-cream); font-family: 'Inter', sans-serif; font-size: 0.9rem; color: var(--color-dark); box-sizing: border-box; margin-bottom: 20px; }
+        .form-input:focus { outline: none; border-color: var(--color-dark); }
+        .btn-primary { width: 100%; padding: 13px; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 500; border: none; background: var(--color-dark); color: var(--color-cream); cursor: pointer; transition: opacity 0.2s; }
+        .btn-primary:hover { opacity: 0.85; }
+        .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+        .login-error { font-family: 'Inter', sans-serif; font-size: 0.85rem; color: var(--color-terracota); margin-top: -12px; margin-bottom: 16px; display: none; }
+
+        /* Panel principal */
+        .admin-wrap { display: none; min-height: 100vh; }
+        .admin-sidebar { position: fixed; top: 0; left: 0; width: 220px; height: 100vh; background: var(--color-dark); padding: 32px 24px; display: flex; flex-direction: column; gap: 4px; z-index: 100; }
+        .sidebar-logo { font-family: 'Inter Tight', sans-serif; font-size: 1rem; font-weight: 500; color: var(--color-cream); margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .sidebar-logo em { font-family: 'Instrument Serif', serif; font-style: italic; color: var(--color-terracota); }
+        .sidebar-link { font-family: 'Inter', sans-serif; font-size: 0.85rem; color: rgba(255,255,255,0.5); padding: 8px 12px; cursor: pointer; transition: color 0.2s; border-radius: 2px; }
+        .sidebar-link:hover, .sidebar-link.active { color: var(--color-cream); background: rgba(255,255,255,0.07); }
+        .sidebar-bottom { margin-top: auto; }
+        .btn-logout { font-family: 'Inter', sans-serif; font-size: 0.8rem; color: rgba(255,255,255,0.3); background: none; border: none; cursor: pointer; padding: 8px 12px; text-align: left; width: 100%; }
+        .btn-logout:hover { color: rgba(255,255,255,0.6); }
+
+        .admin-main { margin-left: 220px; padding: 48px 40px; min-height: 100vh; }
+        .admin-seccion { display: none; }
+        .admin-seccion.active { display: block; }
+        .admin-h1 { font-family: 'Inter Tight', sans-serif; font-size: 1.8rem; font-weight: 500; letter-spacing: -0.03em; color: var(--color-dark); margin-bottom: 8px; }
+        .admin-h1 em { font-family: 'Instrument Serif', serif; font-style: italic; color: var(--color-terracota); }
+        .admin-sub { font-family: 'Inter', sans-serif; font-size: 0.9rem; color: var(--color-sand); margin-bottom: 40px; }
+
+        /* Tarjetas de listas */
+        .listas-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-bottom: 32px; }
+        .lista-card { background: #fff; border: 1px solid var(--color-linen); padding: 24px; cursor: pointer; transition: border-color 0.2s; }
+        .lista-card:hover { border-color: var(--color-dark); }
+        .lista-card-nombre { font-family: 'Inter Tight', sans-serif; font-size: 1rem; font-weight: 500; color: var(--color-dark); margin-bottom: 6px; }
+        .lista-card-fecha { font-family: 'Inter', sans-serif; font-size: 0.8rem; color: var(--color-sand); margin-bottom: 16px; }
+        .lista-card-stats { display: flex; gap: 16px; }
+        .lista-stat { font-family: 'Inter', sans-serif; font-size: 0.8rem; color: var(--color-sand); }
+        .lista-stat strong { color: var(--color-dark); font-weight: 500; }
+        .lista-card-links { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--color-linen); display: flex; gap: 12px; }
+        .lista-link { font-family: 'Inter', sans-serif; font-size: 0.75rem; color: var(--color-terracota); text-decoration: none; }
+        .lista-link:hover { text-decoration: underline; }
+
+        /* Formulario nueva lista */
+        .form-section { background: #fff; border: 1px solid var(--color-linen); padding: 32px; max-width: 560px; }
+        .form-section-titulo { font-family: 'Inter Tight', sans-serif; font-size: 1rem; font-weight: 500; color: var(--color-dark); margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--color-linen); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .btn-secondary { padding: 12px 24px; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 500; border: 1px solid var(--color-dark); background: transparent; color: var(--color-dark); cursor: pointer; transition: all 0.2s; }
+        .btn-secondary:hover { background: var(--color-dark); color: var(--color-cream); }
+        .form-success { font-family: 'Inter', sans-serif; font-size: 0.85rem; color: #0A3622; background: #D1E7DD; padding: 12px 16px; margin-top: 16px; display: none; }
+        .form-error-msg { font-family: 'Inter', sans-serif; font-size: 0.85rem; color: var(--color-terracota); margin-top: 12px; display: none; }
+
+        /* Vista detalle de lista */
+        .back-btn { font-family: 'Inter', sans-serif; font-size: 0.85rem; color: var(--color-sand); background: none; border: none; cursor: pointer; padding: 0; margin-bottom: 32px; display: flex; align-items: center; gap: 6px; }
+        .back-btn:hover { color: var(--color-dark); }
+        .detalle-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 32px; flex-wrap: wrap; gap: 16px; }
+        .regalos-tabla { width: 100%; border-collapse: collapse; }
+        .regalos-tabla th { font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-sand); padding: 0 16px 16px; text-align: left; border-bottom: 1px solid var(--color-linen); }
+        .regalos-tabla td { font-family: 'Inter', sans-serif; font-size: 0.85rem; color: var(--color-dark); padding: 16px; border-bottom: 1px solid var(--color-linen); vertical-align: top; }
+        .regalos-tabla tr:last-child td { border-bottom: none; }
+        .td-titulo { font-weight: 500; }
+        .td-tienda { color: var(--color-sand); font-size: 0.8rem; }
+        .badge { display: inline-block; font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 10px; }
+        .badge-disponible { background: var(--color-linen); color: var(--color-sand); }
+        .badge-reservado { background: #FFF3CD; color: #856404; }
+        .badge-comprado { background: #D1E7DD; color: #0A3622; }
+        .td-invitado { color: var(--color-terracota); font-size: 0.8rem; }
+        .btn-del { background: none; border: none; cursor: pointer; color: var(--color-sand); font-size: 0.8rem; padding: 4px 0; }
+        .btn-del:hover { color: var(--color-terracota); }
+
+        /* Añadir regalo */
+        .add-regalo-form { background: var(--color-linen); padding: 24px; margin-top: 32px; max-width: 640px; }
+        .add-regalo-titulo { font-family: 'Inter Tight', sans-serif; font-size: 0.95rem; font-weight: 500; color: var(--color-dark); margin-bottom: 20px; }
+        textarea.form-input { resize: vertical; min-height: 80px; }
+
+        .divider { height: 1px; background: var(--color-linen); margin: 40px 0; }
+
+        @media (max-width: 768px) {
+            .admin-sidebar { display: none; }
+            .admin-main { margin-left: 0; padding: 80px 20px 40px; }
+            .form-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Login -->
+    <div class="login-wrap" id="login-wrap">
+        <div class="login-box">
+            <p class="login-titulo">Panel de <em>administración</em>.</p>
+            <p class="login-sub">Solo para Carmen.</p>
+            <label class="form-label">Correo</label>
+            <input class="form-input" id="login-email" type="email" placeholder="lalistaslow@gmail.com" autocomplete="email">
+            <label class="form-label">Contraseña</label>
+            <input class="form-input" id="login-pass" type="password" autocomplete="current-password">
+            <p class="login-error" id="login-error">Email o contraseña incorrectos.</p>
+            <button class="btn-primary" id="btn-login" onclick="hacerLogin()">Entrar</button>
+        </div>
+    </div>
+
+    <!-- Panel principal -->
+    <div class="admin-wrap" id="admin-wrap">
+        <aside class="admin-sidebar">
+            <div class="sidebar-logo">La Lista <em>Slow</em></div>
+            <div class="sidebar-link active" onclick="mostrarSeccion('listas')">Listas</div>
+            <div class="sidebar-link" onclick="mostrarSeccion('nueva-lista')">Nueva lista</div>
+            <div class="sidebar-bottom">
+                <button class="btn-logout" onclick="cerrarSesion()">Cerrar sesión</button>
+            </div>
+        </aside>
+
+        <main class="admin-main">
+
+            <!-- Sección: Mis listas -->
+            <section class="admin-seccion active" id="sec-listas">
+                <h1 class="admin-h1">Mis <em>listas</em>.</h1>
+                <p class="admin-sub">Todas las listas activas.</p>
+                <div class="listas-grid" id="listas-grid">
+                    <p style="font-family:'Inter',sans-serif;font-size:0.9rem;color:var(--color-sand)">Cargando...</p>
+                </div>
+            </section>
+
+            <!-- Sección: Nueva lista -->
+            <section class="admin-seccion" id="sec-nueva-lista">
+                <h1 class="admin-h1">Nueva <em>lista</em>.</h1>
+                <p class="admin-sub">Crea una lista para una pareja.</p>
+                <div class="form-section">
+                    <p class="form-section-titulo">Datos de la pareja</p>
+                    <label class="form-label">Nombre de la pareja</label>
+                    <input class="form-input" id="nl-nombre" type="text" placeholder="Ana y Marcos">
+                    <div class="form-row">
+                        <div>
+                            <label class="form-label">Fecha de boda</label>
+                            <input class="form-input" id="nl-fecha" type="date">
+                        </div>
+                        <div>
+                            <label class="form-label">Slug (URL)</label>
+                            <input class="form-input" id="nl-slug" type="text" placeholder="ana-y-marcos" oninput="sanitizarSlug(this)">
+                        </div>
+                    </div>
+                    <button class="btn-secondary" onclick="crearLista()">Crear lista</button>
+                    <div class="form-success" id="nl-success"></div>
+                    <div class="form-error-msg" id="nl-error"></div>
+                </div>
+            </section>
+
+            <!-- Sección: Detalle de lista -->
+            <section class="admin-seccion" id="sec-detalle">
+                <button class="back-btn" onclick="mostrarSeccion('listas')">← Volver a listas</button>
+                <div class="detalle-header">
+                    <div>
+                        <h1 class="admin-h1" id="det-titulo"></h1>
+                        <p class="admin-sub" id="det-fecha"></p>
+                    </div>
+                    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+                        <a id="det-link-invitados" href="#" target="_blank" class="btn-secondary" style="text-decoration:none;padding:10px 20px;font-size:0.8rem;">Ver como invitado ↗</a>
+                        <a id="det-link-novios" href="#" target="_blank" class="btn-secondary" style="text-decoration:none;padding:10px 20px;font-size:0.8rem;">Ver como novios ↗</a>
+                    </div>
+                </div>
+
+                <table class="regalos-tabla" id="regalos-tabla">
+                    <thead>
+                        <tr>
+                            <th>Regalo</th>
+                            <th>Estado</th>
+                            <th>Invitado</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="regalos-tbody"></tbody>
+                </table>
+
+                <div class="add-regalo-form">
+                    <p class="add-regalo-titulo">Añadir regalo</p>
+                    <label class="form-label">Título</label>
+                    <input class="form-input" id="rg-titulo" type="text" placeholder="Cocotte Le Creuset">
+                    <div class="form-row">
+                        <div>
+                            <label class="form-label">Tienda</label>
+                            <input class="form-input" id="rg-tienda" type="text" placeholder="Le Creuset">
+                        </div>
+                        <div>
+                            <label class="form-label">Enlace tienda</label>
+                            <input class="form-input" id="rg-enlace" type="url" placeholder="https://...">
+                        </div>
+                    </div>
+                    <label class="form-label">Descripción (opcional)</label>
+                    <textarea class="form-input" id="rg-desc" placeholder="Una o dos frases."></textarea>
+                    <label class="form-label">URL imagen (opcional)</label>
+                    <input class="form-input" id="rg-imagen" type="url" placeholder="https://...">
+                    <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+                        <button class="btn-secondary" onclick="añadirRegalo()">Añadir regalo</button>
+                        <span class="form-error-msg" id="rg-error" style="margin:0"></span>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const SUPABASE_URL = 'https://sryhsquvugxclgkygkxi.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_VlOuR2N2xgWCrjzOWRkNVA_d1Z6bQtd';
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        let listaActual = null;
+        let regalosActuales = [];
+        let reservasActuales = [];
+
+        // ── AUTH ──────────────────────────────────────────────
+        async function hacerLogin() {
+            const email = document.getElementById('login-email').value.trim();
+            const pass = document.getElementById('login-pass').value;
+            const btn = document.getElementById('btn-login');
+            const err = document.getElementById('login-error');
+            err.style.display = 'none';
+            btn.textContent = 'Entrando...';
+            btn.disabled = true;
+
+            const { error } = await supabase.auth.signInWithPassword({ email, password: pass });
+            if (error) {
+                err.style.display = 'block';
+                btn.textContent = 'Entrar';
+                btn.disabled = false;
+            } else {
+                mostrarPanel();
+            }
+        }
+
+        async function cerrarSesion() {
+            await supabase.auth.signOut();
+            document.getElementById('admin-wrap').style.display = 'none';
+            document.getElementById('login-wrap').style.display = 'flex';
+        }
+
+        async function comprobarSesion() {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (session) mostrarPanel();
+        }
+
+        function mostrarPanel() {
+            document.getElementById('login-wrap').style.display = 'none';
+            document.getElementById('admin-wrap').style.display = 'flex';
+            cargarListas();
+        }
+
+        document.getElementById('login-pass').addEventListener('keydown', e => {
+            if (e.key === 'Enter') hacerLogin();
+        });
+
+        // ── NAVEGACIÓN ────────────────────────────────────────
+        function mostrarSeccion(id) {
+            document.querySelectorAll('.admin-seccion').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+            document.getElementById('sec-' + id).classList.add('active');
+            const links = { 'listas': 0, 'nueva-lista': 1 };
+            const idx = links[id];
+            if (idx !== undefined) {
+                document.querySelectorAll('.sidebar-link')[idx].classList.add('active');
+            }
+        }
+
+        // ── LISTAS ────────────────────────────────────────────
+        async function cargarListas() {
+            const { data: listas } = await supabase
+                .from('listas')
+                .select('*')
+                .eq('activa', true)
+                .order('created_at', { ascending: false });
+
+            const grid = document.getElementById('listas-grid');
+            if (!listas || !listas.length) {
+                grid.innerHTML = '<p style="font-family:\'Inter\',sans-serif;font-size:0.9rem;color:var(--color-sand)">Todavía no hay listas. Crea la primera.</p>';
+                return;
+            }
+
+            const listaIds = listas.map(l => l.id);
+            const { data: regalos } = await supabase.from('regalos').select('id, lista_id').in('lista_id', listaIds);
+            const { data: reservas } = await supabase.from('reservas').select('regalo_id, estado, regalos(lista_id)').in('regalos.lista_id', listaIds);
+
+            grid.innerHTML = '';
+            listas.forEach(lista => {
+                const regalosLista = (regalos || []).filter(r => r.lista_id === lista.id);
+                const reservasLista = (reservas || []).filter(r => r.regalos && r.regalos.lista_id === lista.id);
+                const comprados = reservasLista.filter(r => r.estado === 'comprado').length;
+                const reservados = reservasLista.filter(r => r.estado === 'reservado').length;
+                const fechaStr = lista.fecha_boda
+                    ? new Date(lista.fecha_boda).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })
+                    : 'Sin fecha';
+                const origin = window.location.origin;
+
+                const card = document.createElement('div');
+                card.className = 'lista-card';
+                card.innerHTML = `
+                    <p class="lista-card-nombre">${lista.nombre_pareja}</p>
+                    <p class="lista-card-fecha">${fechaStr}</p>
+                    <div class="lista-card-stats">
+                        <span class="lista-stat"><strong>${regalosLista.length}</strong> regalos</span>
+                        <span class="lista-stat"><strong>${comprados}</strong> comprados</span>
+                        <span class="lista-stat"><strong>${reservados}</strong> reservados</span>
+                    </div>
+                    <div class="lista-card-links">
+                        <a href="${origin}/lista.html?id=${lista.slug}" target="_blank" class="lista-link">Invitados ↗</a>
+                        <a href="${origin}/novios.html?id=${lista.slug}" target="_blank" class="lista-link">Novios ↗</a>
+                    </div>`;
+                card.addEventListener('click', (e) => {
+                    if (e.target.tagName === 'A') return;
+                    abrirDetalle(lista);
+                });
+                grid.appendChild(card);
+            });
+        }
+
+        // ── NUEVA LISTA ───────────────────────────────────────
+        function sanitizarSlug(input) {
+            input.value = input.value
+                .toLowerCase()
+                .replace(/\s+/g, '-')
+                .replace(/[^a-z0-9-]/g, '');
+        }
+
+        async function crearLista() {
+            const nombre = document.getElementById('nl-nombre').value.trim();
+            const fecha = document.getElementById('nl-fecha').value;
+            const slug = document.getElementById('nl-slug').value.trim();
+            const sucEl = document.getElementById('nl-success');
+            const errEl = document.getElementById('nl-error');
+            sucEl.style.display = 'none';
+            errEl.style.display = 'none';
+
+            if (!nombre || !slug) { errEl.textContent = 'El nombre y el slug son obligatorios.'; errEl.style.display = 'block'; return; }
+
+            const { error } = await supabase.from('listas').insert({
+                nombre_pareja: nombre,
+                fecha_boda: fecha || null,
+                slug,
+                activa: true
+            });
+
+            if (error) {
+                errEl.textContent = error.code === '23505' ? 'Ese slug ya está en uso. Elige otro.' : 'Error al crear la lista. Inténtalo de nuevo.';
+                errEl.style.display = 'block';
+            } else {
+                const origin = window.location.origin;
+                sucEl.innerHTML = `Lista creada. <a href="${origin}/lista.html?id=${slug}" target="_blank" style="color:var(--color-terracota)">Ver lista ↗</a>`;
+                sucEl.style.display = 'block';
+                document.getElementById('nl-nombre').value = '';
+                document.getElementById('nl-fecha').value = '';
+                document.getElementById('nl-slug').value = '';
+                cargarListas();
+            }
+        }
+
+        // ── DETALLE DE LISTA ──────────────────────────────────
+        async function abrirDetalle(lista) {
+            listaActual = lista;
+            document.getElementById('det-titulo').innerHTML = `<em>${lista.nombre_pareja}</em>`;
+            const fechaStr = lista.fecha_boda
+                ? new Date(lista.fecha_boda).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })
+                : '';
+            document.getElementById('det-fecha').textContent = fechaStr;
+
+            const origin = window.location.origin;
+            document.getElementById('det-link-invitados').href = `${origin}/lista.html?id=${lista.slug}`;
+            document.getElementById('det-link-novios').href = `${origin}/novios.html?id=${lista.slug}`;
+
+            await cargarRegalosDetalle();
+            mostrarSeccion('detalle');
+        }
+
+        async function cargarRegalosDetalle() {
+            const { data: regalos } = await supabase
+                .from('regalos')
+                .select('*')
+                .eq('lista_id', listaActual.id)
+                .order('orden');
+
+            const { data: reservas } = await supabase
+                .from('reservas')
+                .select('*');
+
+            regalosActuales = regalos || [];
+            reservasActuales = reservas || [];
+            renderTablaRegalos();
+        }
+
+        function renderTablaRegalos() {
+            const tbody = document.getElementById('regalos-tbody');
+            if (!regalosActuales.length) {
+                tbody.innerHTML = '<tr><td colspan="4" style="font-family:\'Inter\',sans-serif;font-size:0.85rem;color:var(--color-sand);padding:24px 16px;">Todavía no hay regalos. Añade el primero.</td></tr>';
+                return;
+            }
+            tbody.innerHTML = '';
+            regalosActuales.forEach(regalo => {
+                const reserva = reservasActuales.find(r => r.regalo_id === regalo.id);
+                const estado = reserva ? reserva.estado : 'disponible';
+                const invitado = reserva ? reserva.nombre_invitado : '—';
+                const badgeText = estado === 'disponible' ? 'Disponible' : estado === 'reservado' ? 'Reservado' : 'Comprado ✓';
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>
+                        <p class="td-titulo">${regalo.titulo}</p>
+                        <p class="td-tienda">${regalo.tienda || ''}</p>
+                    </td>
+                    <td><span class="badge badge-${estado}">${badgeText}</span></td>
+                    <td class="td-invitado">${invitado}</td>
+                    <td><button class="btn-del" onclick="eliminarRegalo('${regalo.id}')">Eliminar</button></td>`;
+                tbody.appendChild(tr);
+            });
+        }
+
+        async function añadirRegalo() {
+            const titulo = document.getElementById('rg-titulo').value.trim();
+            const tienda = document.getElementById('rg-tienda').value.trim();
+            const enlace = document.getElementById('rg-enlace').value.trim();
+            const desc = document.getElementById('rg-desc').value.trim();
+            const imagen = document.getElementById('rg-imagen').value.trim();
+            const errEl = document.getElementById('rg-error');
+            errEl.style.display = 'none';
+
+            if (!titulo) { errEl.textContent = 'El título es obligatorio.'; errEl.style.display = 'inline'; return; }
+
+            const orden = regalosActuales.length + 1;
+            const { error } = await supabase.from('regalos').insert({
+                lista_id: listaActual.id,
+                titulo,
+                tienda: tienda || null,
+                enlace_tienda: enlace || null,
+                descripcion: desc || null,
+                imagen: imagen || null,
+                orden
+            });
+
+            if (error) {
+                errEl.textContent = 'Error al añadir. Inténtalo de nuevo.';
+                errEl.style.display = 'inline';
+            } else {
+                document.getElementById('rg-titulo').value = '';
+                document.getElementById('rg-tienda').value = '';
+                document.getElementById('rg-enlace').value = '';
+                document.getElementById('rg-desc').value = '';
+                document.getElementById('rg-imagen').value = '';
+                await cargarRegalosDetalle();
+            }
+        }
+
+        async function eliminarRegalo(id) {
+            if (!confirm('¿Eliminar este regalo?')) return;
+            await supabase.from('reservas').delete().eq('regalo_id', id);
+            await supabase.from('regalos').delete().eq('id', id);
+            await cargarRegalosDetalle();
+        }
+
+        // ── INIT ──────────────────────────────────────────────
+        comprobarSesion();
+    </script>
+</body>
+</html>
