@@ -124,7 +124,7 @@
         async function cargarLista() {
             if (!slug) { mostrarError(); return; }
 
-            const { data: lista, error } = await supabase
+            const { data: lista, error } = await db
                 .from('listas')
                 .select('*')
                 .eq('slug', slug)
@@ -145,13 +145,13 @@
             const enlaceInvitados = `${origin}/lista.html?id=${lista.slug}`;
             document.getElementById('share-url').textContent = enlaceInvitados;
 
-            const { data: regalos } = await supabase
+            const { data: regalos } = await db
                 .from('regalos')
                 .select('*')
                 .eq('lista_id', lista.id)
                 .order('orden');
 
-            const { data: reservas } = await supabase
+            const { data: reservas } = await db
                 .from('reservas')
                 .select('*');
 
