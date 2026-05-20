@@ -116,7 +116,7 @@
     <script>
         const SUPABASE_URL = 'https://sryhsquvugxclgkygkxi.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_VlOuR2N2xgWCrjzOWRkNVA_d1Z6bQtd';
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
         const slug = new URLSearchParams(window.location.search).get('id');
         let listaSlug = '';

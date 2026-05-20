@@ -218,7 +218,7 @@
     <script>
         const SUPABASE_URL = 'https://sryhsquvugxclgkygkxi.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_VlOuR2N2xgWCrjzOWRkNVA_d1Z6bQtd';
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
         let listaActual = null;
         let regalosActuales = [];
@@ -234,7 +234,7 @@
             btn.textContent = 'Entrando...';
             btn.disabled = true;
 
-            const { error } = await supabase.auth.signInWithPassword({ email, password: pass });
+            const { error } = await db.auth.signInWithPassword({ email, password: pass });
             if (error) {
                 err.style.display = 'block';
                 btn.textContent = 'Entrar';
@@ -245,13 +245,13 @@
         }
 
         async function cerrarSesion() {
-            await supabase.auth.signOut();
+            await db.auth.signOut();
             document.getElementById('admin-wrap').style.display = 'none';
             document.getElementById('login-wrap').style.display = 'flex';
         }
 
         async function comprobarSesion() {
-            const { data: { session } } = await supabase.auth.getSession();
+            const { data: { session } } = await db.auth.getSession();
             if (session) mostrarPanel();
         }
 
@@ -279,7 +279,7 @@
 
         // ── LISTAS ────────────────────────────────────────────
         async function cargarListas() {
-            const { data: listas } = await supabase
+            const { data: listas } = await db
                 .from('listas')
                 .select('*')
                 .eq('activa', true)
@@ -292,8 +292,8 @@
             }
 
             const listaIds = listas.map(l => l.id);
-            const { data: regalos } = await supabase.from('regalos').select('id, lista_id').in('lista_id', listaIds);
-            const { data: reservas } = await supabase.from('reservas').select('regalo_id, estado, regalos(lista_id)').in('regalos.lista_id', listaIds);
+            const { data: regalos } = await db.from('regalos').select('id, lista_id').in('lista_id', listaIds);
+            const { data: reservas } = await db.from('reservas').select('regalo_id, estado, regalos(lista_id)').in('regalos.lista_id', listaIds);
 
             grid.innerHTML = '';
             listas.forEach(lista => {
@@ -347,7 +347,7 @@
 
             if (!nombre || !slug) { errEl.textContent = 'El nombre y el slug son obligatorios.'; errEl.style.display = 'block'; return; }
 
-            const { error } = await supabase.from('listas').insert({
+            const { error } = await db.from('listas').insert({
                 nombre_pareja: nombre,
                 fecha_boda: fecha || null,
                 slug,
@@ -386,13 +386,13 @@
         }
 
         async function cargarRegalosDetalle() {
-            const { data: regalos } = await supabase
+            const { data: regalos } = await db
                 .from('regalos')
                 .select('*')
                 .eq('lista_id', listaActual.id)
                 .order('orden');
 
-            const { data: reservas } = await supabase
+            const { data: reservas } = await db
                 .from('reservas')
                 .select('*');
 
@@ -438,7 +438,7 @@
             if (!titulo) { errEl.textContent = 'El título es obligatorio.'; errEl.style.display = 'inline'; return; }
 
             const orden = regalosActuales.length + 1;
-            const { error } = await supabase.from('regalos').insert({
+            const { error } = await db.from('regalos').insert({
                 lista_id: listaActual.id,
                 titulo,
                 tienda: tienda || null,
@@ -463,8 +463,8 @@
 
         async function eliminarRegalo(id) {
             if (!confirm('¿Eliminar este regalo?')) return;
-            await supabase.from('reservas').delete().eq('regalo_id', id);
-            await supabase.from('regalos').delete().eq('id', id);
+            await db.from('reservas').delete().eq('regalo_id', id);
+            await db.from('regalos').delete().eq('id', id);
             await cargarRegalosDetalle();
         }
 
