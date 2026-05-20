@@ -355,7 +355,7 @@
             });
 
             if (error) {
-                errEl.textContent = error.code === '23505' ? 'Ese slug ya está en uso. Elige otro.' : 'Error al crear la lista. Inténtalo de nuevo.';
+                errEl.textContent = error.code === '23505' ? 'Ese slug ya está en uso. Elige otro.' : `Error: ${error.message} (${error.code})`;
                 errEl.style.display = 'block';
             } else {
                 const origin = window.location.origin;
