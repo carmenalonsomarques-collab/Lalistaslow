@@ -161,6 +161,8 @@
                             <input class="form-input" id="nl-slug" type="text" placeholder="ana-y-marcos" oninput="sanitizarSlug(this)">
                         </div>
                     </div>
+                    <label class="form-label">Email de los novios</label>
+                    <input class="form-input" id="nl-email" type="email" placeholder="ana@email.com">
                     <button class="btn-secondary" onclick="crearLista()">Crear lista</button>
                     <div class="form-success" id="nl-success"></div>
                     <div class="form-error-msg" id="nl-error"></div>
@@ -351,6 +353,7 @@
             const nombre = document.getElementById('nl-nombre').value.trim();
             const fecha = document.getElementById('nl-fecha').value;
             const slug = document.getElementById('nl-slug').value.trim();
+            const email = document.getElementById('nl-email').value.trim();
             const sucEl = document.getElementById('nl-success');
             const errEl = document.getElementById('nl-error');
             sucEl.style.display = 'none';
@@ -365,6 +368,7 @@
                 fecha_boda: fecha || null,
                 slug,
                 pin_novios: pin,
+                email_novios: email || null,
                 activa: true
             });
 
@@ -378,6 +382,7 @@
                 document.getElementById('nl-nombre').value = '';
                 document.getElementById('nl-fecha').value = '';
                 document.getElementById('nl-slug').value = '';
+                document.getElementById('nl-email').value = '';
                 cargarListas();
             }
         }

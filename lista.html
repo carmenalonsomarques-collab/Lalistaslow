@@ -109,6 +109,7 @@
         let regalosData = [];
         let reservasData = [];
         let regalosSeleccionado = null;
+        let listaData = null;
 
         async function cargarLista() {
             if (!slug) { mostrarError(); return; }
@@ -122,6 +123,7 @@
 
             if (error || !lista) { mostrarError(); return; }
 
+            listaData = lista;
             document.title = `Lista de ${lista.nombre_pareja} | La Lista Slow`;
             document.getElementById('titulo-lista').innerHTML = `La lista de <em>${lista.nombre_pareja}</em>.`;
             if (lista.fecha_boda) {
@@ -239,6 +241,25 @@
             const reserva = reservasData.find(r => r.regalo_id === regalosSeleccionado);
             if (reserva) {
                 await db.from('reservas').update({ estado: 'comprado' }).eq('id', reserva.id);
+
+                // Enviar email si la lista tiene email de novios
+                if (listaData && listaData.email_novios) {
+                    const regalo = regalosData.find(r => r.id === regalosSeleccionado);
+                    try {
+                        await fetch('/api/send-email', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                emailNovios: listaData.email_novios,
+                                nombreRegalo: regalo ? regalo.titulo : 'un regalo',
+                                nombreInvitado: reserva.nombre_invitado,
+                                nombrePareja: listaData.nombre_pareja
+                            })
+                        });
+                    } catch (e) {
+                        // El email falla silenciosamente — el estado ya se guardó
+                    }
+                }
             }
             cerrarModal('modal-comprado');
             await recargarReservas();
