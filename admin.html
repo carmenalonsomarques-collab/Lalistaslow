@@ -176,6 +176,7 @@
                     <div>
                         <h1 class="admin-h1" id="det-titulo"></h1>
                         <p class="admin-sub" id="det-fecha"></p>
+                        <p style="font-family:'Inter',sans-serif;font-size:0.8rem;color:var(--color-sand);margin-top:8px;">PIN de novios: <strong id="det-pin" style="font-family:'Inter Tight',sans-serif;font-size:0.95rem;letter-spacing:0.12em;color:var(--color-dark);">—</strong></p>
                     </div>
                     <div style="display:flex;gap:12px;flex-wrap:wrap;">
                         <a id="det-link-invitados" href="#" target="_blank" class="btn-secondary" style="text-decoration:none;padding:10px 20px;font-size:0.8rem;">Ver como invitado ↗</a>
@@ -399,6 +400,7 @@
             const origin = window.location.origin;
             document.getElementById('det-link-invitados').href = `${origin}/lista.html?id=${lista.slug}`;
             document.getElementById('det-link-novios').href = `${origin}/novios.html?id=${lista.slug}`;
+            document.getElementById('det-pin').textContent = lista.pin_novios || '—';
 
             await cargarRegalosDetalle();
             mostrarSeccion('detalle');
