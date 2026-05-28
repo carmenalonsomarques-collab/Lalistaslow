@@ -36,16 +36,28 @@
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@type": "Organization",
+          "@type": "ProfessionalService",
           "@id": "https://lalistaslow.com/#organization",
           "name": "La Lista Slow",
           "url": "https://lalistaslow.com",
           "email": "lalistaslow@gmail.com",
           "description": "Lista de bodas personalizada y asesoría de eventos en Asturias",
+          "image": "https://lalistaslow.com/og-image.jpg",
+          "priceRange": "$$",
           "address": {
             "@type": "PostalAddress",
             "addressLocality": "Asturias",
+            "addressRegion": "Principado de Asturias",
             "addressCountry": "ES"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "43.3614",
+            "longitude": "-5.8593"
+          },
+          "areaServed": {
+            "@type": "AdministrativeArea",
+            "name": "Asturias"
           },
           "sameAs": [
             "https://www.instagram.com/lalistaslow/",
@@ -79,9 +91,13 @@
     }
     </script>
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts & Preconnect / DNS Prefetch -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://substackcdn.com">
+    <link rel="dns-prefetch" href="https://substackcdn.com">
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:ital,wght@0,300..700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles.css">
 </head>
@@ -271,7 +287,7 @@
                     <!-- Lista de bodas -->
                     <div class="servicio-card reveal">
                         <div class="servicio-img-wrap">
-                            <img src="./tarta_web.png" alt="Lista de bodas curada y personalizada — La Lista Slow" class="servicio-img">
+                            <img src="./tarta_web.png" alt="Lista de bodas curada y personalizada — La Lista Slow" class="servicio-img" loading="lazy">
                         </div>
                         <div class="servicio-content">
                             <span class="section-subtitle">Lista de bodas</span>
@@ -279,8 +295,12 @@
                             <p>Elaboramos juntas una lista que refleje vuestra forma de vivir. Marcas con criterio, artesanos reales y experiencias que de verdad merezca la pena regalar.</p>
                             <div class="precios-tabla">
                                 <div class="precio-fila">
-                                    <span class="precio-concepto">Elaboración de la lista</span>
+                                    <span class="precio-concepto">Hasta 30 regalos</span>
                                     <span class="precio-valor">170 €</span>
+                                </div>
+                                <div class="precio-fila">
+                                    <span class="precio-concepto">Hasta 50 regalos</span>
+                                    <span class="precio-valor">250 €</span>
                                 </div>
                             </div>
                             <a href="mailto:lalistaslow@gmail.com?subject=Lista%20de%20bodas" class="btn btn-outline">Solicitar información</a>
@@ -289,7 +309,7 @@
                     <!-- Asesoría -->
                     <div class="servicio-card reveal">
                         <div class="servicio-img-wrap">
-                            <img src="./asesoria_eventos.png" alt="Asesoría de eventos online en Asturias — La Lista Slow" class="servicio-img">
+                            <img src="./asesoria_eventos.png" alt="Asesoría de eventos online en Asturias — La Lista Slow" class="servicio-img" loading="lazy">
                         </div>
                         <div class="servicio-content">
                             <span class="section-subtitle">Asesoría de eventos</span>
@@ -302,8 +322,8 @@
                                     <span class="precio-valor">40 €</span>
                                 </div>
                                 <div class="precio-fila">
-                                    <span class="precio-concepto">Coordinación integral del evento</span>
-                                    <span class="precio-valor precio-consultar">Consultar</span>
+                                    <span class="precio-concepto">Pack Acompañamiento Slow · 3 sesiones</span>
+                                    <span class="precio-valor">260 €</span>
                                 </div>
                             </div>
                             <a href="mailto:lalistaslow@gmail.com?subject=Solicitud%20de%20asesor%C3%ADa" class="btn btn-outline">Solicitar sesión</a>
@@ -313,7 +333,7 @@
                     <div class="servicio-card servicio-card--newsletter reveal">
                         <div class="newsletter-inner">
                             <a href="https://substack.com/@lalistaslow" target="_blank" class="newsletter-brand-link">
-                                <img src="https://substackcdn.com/image/fetch/$s_!7gTn!,w_224,h_224,c_fill,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3caaf2d-695d-4a6e-b0a7-38a33dbe6271_500x500.jpeg" alt="Carmen — La Lista Slow en Substack" class="substack-avatar">
+                                <img src="https://substackcdn.com/image/fetch/$s_!7gTn!,w_224,h_224,c_fill,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3caaf2d-695d-4a6e-b0a7-38a33dbe6271_500x500.jpeg" alt="Carmen — La Lista Slow en Substack" class="substack-avatar" loading="lazy">
                                 <span class="newsletter-brand-logo">La Lista <em>Slow</em></span>
                             </a>
                             <svg class="substack-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="Substack">
