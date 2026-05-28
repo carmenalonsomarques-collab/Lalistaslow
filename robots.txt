@@ -1,0 +1,9 @@
+# La Lista Slow — robots.txt
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /novios.html
+Disallow: /lista.html
+Disallow: /api/
+
+Sitemap: https://lalistaslow.com/sitemap.xml

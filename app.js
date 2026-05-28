@@ -26,7 +26,7 @@ let gifts = [
         storeInfo: "Comprar en Real Fábrica Española",
         storeLink: "https://realfabrica.com/",
         description: "Esa manta para toda la vida para las tardes de peli y sofá en invierno.",
-        image: "./manta_merino.png",
+        image: "./manta_merino.jpg",
         reserved: false
     },
     {
@@ -44,7 +44,7 @@ let gifts = [
         storeInfo: "Ver en Sha Wellness Marbella",
         storeLink: "https://shawellnessclinic.com/",
         description: "Un par de días en el Sha, sin móvil y sin agenda. El mejor regalo para después de la boda.",
-        image: "./sha_wellness.png",
+        image: "./sha_wellness.jpg",
         reserved: false
     },
     {
@@ -53,7 +53,7 @@ let gifts = [
         storeInfo: "Reservar en El Molín de Mingo",
         storeLink: "https://elmolindemingo.es/",
         description: "Una experiencia gastronómica inolvidable en plena naturaleza asturiana.",
-        image: "./molin_mingo.png",
+        image: "./molin_mingo.jpg",
         reserved: false
     },
     {
@@ -62,7 +62,7 @@ let gifts = [
         storeInfo: "Comprar en Oura",
         storeLink: "https://ouraring.com/",
         description: "El anillo que mide el sueño, la actividad y la recuperación. Sin pantalla, sin ruido.",
-        image: "./oura_ring.png",
+        image: "./oura_ring.jpg",
         reserved: false
     },
     {
@@ -71,7 +71,7 @@ let gifts = [
         storeInfo: "Comprar en Le Creuset",
         storeLink: "https://www.lecreuset.es/",
         description: "Para los guisos lentos de domingo. Una pieza de hierro fundido para toda la vida.",
-        image: "./cocotte.png",
+        image: "./cocotte.jpg",
         reserved: false
     },
     {
@@ -80,7 +80,7 @@ let gifts = [
         storeInfo: "Comprar en Cuchillería Simón",
         storeLink: "https://www.cuchilleriasimon.es/categoria-producto/cuchillos-y-tijeras-de-cocina/nakagawa-knives/",
         description: "Forjado a mano en Sakai. La precisión y la calma de la tradición japonesa en la cocina.",
-        image: "./cuchillo_japones.png",
+        image: "./cuchillo_japones.jpg",
         reserved: false
     },
     {
@@ -89,7 +89,7 @@ let gifts = [
         storeInfo: "Comprar en Society Limonta",
         storeLink: "https://www.societylimonta.com/",
         description: "Lino italiano lavado al stone. Para vestir la mesa de cualquier día como si fuera especial.",
-        image: "./manteleria_lino.png",
+        image: "./manteleria_lino.jpg",
         reserved: false
     },
     {
@@ -98,7 +98,7 @@ let gifts = [
         storeInfo: "Comprar en Cire Trudon",
         storeLink: "https://trudon.com/",
         description: "Cera vegetal y aromas de la perfumería más antigua de París. El tarro vacío también te lo quedas.",
-        image: "./vela_trudon.png",
+        image: "./vela_trudon.jpg",
         reserved: false
     },
     {
@@ -107,7 +107,7 @@ let gifts = [
         storeInfo: "Comprar en La Soufflerie",
         storeLink: "https://lasoufflerie.com/",
         description: "Sopladas a mano en París, vidrio reciclado. Ninguna igual a la otra.",
-        image: "./copas_artesanas.png",
+        image: "./copas_artesanas.jpg",
         reserved: false
     },
     {
@@ -116,7 +116,7 @@ let gifts = [
         storeInfo: "Comprar en Marset",
         storeLink: "https://www.marset.com/",
         description: "Diseño de Marset. Una lámpara que aguanta el paso del tiempo sin que lo parezca.",
-        image: "./lampara_marset.png",
+        image: "./lampara_marset.jpg",
         reserved: false
     },
     {
@@ -125,7 +125,7 @@ let gifts = [
         storeInfo: "Comprar en Frette",
         storeLink: "https://www.frette.com/",
         description: "Lino italiano lavado al stone. Para que el baño de casa se parezca al de un buen hotel.",
-        image: "./toallas_lino.png",
+        image: "./toallas_lino.jpg",
         reserved: false
     },
     {
@@ -134,7 +134,7 @@ let gifts = [
         storeInfo: "Comprar en Yevea",
         storeLink: "https://yevea.com/madera-olivo-tablas-cortar.html",
         description: "Madera de olivo trabajada a mano en Andalucía. Una tabla que dura toda la vida.",
-        image: "./tabla_olivo.png",
+        image: "./tabla_olivo.jpg",
         reserved: false
     }
 ];
