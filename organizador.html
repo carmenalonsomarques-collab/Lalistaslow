@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Organizador de Bodas Slow — La Lista Slow</title>
+  <meta name="description" content="Un cuaderno para organizar vuestra boda con intención y calma. Seis capítulos, espacios para escribir, presupuesto, proveedores y el día de la boda. PDF imprimible. 7 €.">
+
+  <meta property="og:title" content="El Organizador de Bodas Slow — La Lista Slow">
+  <meta property="og:description" content="No es una app. No es un Excel. Es un cuaderno para pensar despacio.">
+  <meta property="og:image" content="https://lalistaslow.com/organizador-portada.png">
+  <meta property="og:url" content="https://lalistaslow.com/organizador">
+  <meta property="og:type" content="product">
+
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;1,400&family=Inter+Tight:ital,wght@0,300..700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+
+  <style>
+    /* ---- Organizador page styles ---- */
+    .org-hero {
+      padding-top: 7rem;
+      padding-bottom: 0;
+      background: var(--bg-color);
+    }
+
+    .org-hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      min-height: 80vh;
+      align-items: stretch;
+    }
+
+    .org-hero-text {
+      padding: 5rem 5% 5rem 4%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-right: 1px solid var(--line-soft);
+    }
+
+    .org-eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2.2px;
+      color: var(--text-secondary);
+      font-weight: 500;
+      margin-bottom: 2rem;
+    }
+
+    .org-title {
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      line-height: 0.95;
+      margin-bottom: 1.5rem;
+    }
+
+    .org-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 3rem;
+      max-width: 36ch;
+    }
+
+    .org-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .org-price {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+    }
+
+    .org-price-note {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .org-hero-img {
+      position: relative;
+      overflow: hidden;
+      background: var(--bg-alt);
+    }
+
+    .org-hero-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    /* ---- Divider ---- */
+    .org-divider {
+      width: 100%;
+      height: 1px;
+      background: var(--line-soft);
+    }
+
+    /* ---- Contenido section ---- */
+    .org-contenido {
+      padding: 6rem 0;
+      background: var(--bg-color);
+    }
+
+    .org-contenido-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    .org-intro-col {
+      padding-right: 5%;
+      border-right: 1px solid var(--line-soft);
+    }
+
+    .org-intro-col p {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin-bottom: 1.2rem;
+    }
+
+    .org-intro-col p:last-child {
+      margin-bottom: 0;
+    }
+
+    .org-intro-col strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .org-capitulos-col {
+      padding-left: 5%;
+    }
+
+    .org-cap-label {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2.2px;
+      color: var(--text-secondary);
+      font-weight: 500;
+      margin-bottom: 2.5rem;
+    }
+
+    .org-cap-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .org-cap-item {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      padding: 1.1rem 0;
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .org-cap-item:last-child {
+      border-bottom: none;
+    }
+
+    .org-cap-num {
+      font-family: var(--font-serif);
+      font-style: italic;
+      color: var(--accent-color);
+      font-size: 1rem;
+      flex-shrink: 0;
+      min-width: 2rem;
+    }
+
+    .org-cap-name {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+
+    .org-cap-detail {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    /* ---- Preview strip ---- */
+    .org-preview {
+      background: var(--bg-alt);
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .org-preview-strip {
+      display: flex;
+      gap: 0;
+    }
+
+    .org-preview-img {
+      flex: 1;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+    }
+
+    .org-preview-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      filter: grayscale(15%);
+      transition: filter 0.4s ease;
+    }
+
+    .org-preview-img:hover img {
+      filter: grayscale(0%);
+    }
+
+    /* ---- CTA final ---- */
+    .org-cta {
+      padding: 8rem 0;
+      background: var(--bg-color);
+      text-align: center;
+    }
+
+    .org-cta-inner {
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .org-cta h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+    }
+
+    .org-cta p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+
+    .org-cta-meta {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      margin-top: 1.5rem;
+    }
+
+    /* ---- Buttons ---- */
+    .btn {
+      display: inline-block;
+      padding: 0.9rem 2.2rem;
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1.5px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--text-primary);
+      color: var(--bg-color);
+      border-color: var(--text-primary);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-color);
+      border-color: var(--accent-color);
+    }
+
+    /* ---- Mobile ---- */
+    @media (max-width: 768px) {
+      .org-hero-inner {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .org-hero-img {
+        aspect-ratio: 4/3;
+        order: -1;
+      }
+
+      .org-hero-text {
+        padding: 3rem 4%;
+        border-right: none;
+        border-top: 1px solid var(--line-soft);
+      }
+
+      .org-contenido-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .org-intro-col {
+        padding-right: 0;
+        border-right: none;
+        border-bottom: 1px solid var(--line-soft);
+        padding-bottom: 3rem;
+        margin-bottom: 3rem;
+      }
+
+      .org-capitulos-col {
+        padding-left: 0;
+      }
+
+      .org-preview-strip {
+        flex-direction: row;
+      }
+
+      .org-preview-img {
+        aspect-ratio: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <a href="./" class="logo">La Lista <em>Slow</em></a>
+    <div class="nav-links">
+      <a href="mailto:lalistaslow@gmail.com">Contacto</a>
+      <a href="https://www.instagram.com/lalistaslow/" target="_blank" class="nav-instagram" aria-label="Instagram">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        Instagram
+      </a>
+      <a href="https://substack.com/@lalistaslow" target="_blank" class="nav-substack">Substack ↗</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="org-hero">
+    <div class="org-hero-inner">
+      <div class="org-hero-text">
+        <p class="org-eyebrow">La Lista Slow · Descargable</p>
+        <h1 class="org-title">El Organizador<br>de Bodas <em>Slow</em></h1>
+        <p class="org-subtitle">
+          No es una app. No es un Excel.<br>
+          Es un cuaderno para organizar vuestra boda despacio, con criterio y sin que el proceso os consuma.
+        </p>
+        <div class="org-price-row">
+          <span class="org-price">7 €</span>
+          <span class="org-price-note">PDF · Imprimible · Descarga inmediata</span>
+        </div>
+        <a href="https://buy.stripe.com/fZu9AT2253mq66igLI8Zq00" class="btn btn-primary">Comprar el Organizador — 7 €</a>
+      </div>
+      <div class="org-hero-img">
+        <img src="./organizador-portada.png" alt="El Organizador de Bodas Slow — portada" loading="eager">
+      </div>
+    </div>
+  </section>
+
+  <div class="org-divider"></div>
+
+  <!-- Contenido -->
+  <section class="org-contenido">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <span class="section-subtitle">Qué hay dentro</span>
+      </div>
+      <div class="org-contenido-grid">
+        <div class="org-intro-col">
+          <p>Una boda no empieza el día que pedís el espacio. Empieza mucho antes, cuando decidís qué queréis sentir y qué queréis dejar de lado.</p>
+          <p>Este cuaderno tiene espacio para eso. Para el moodboard que nunca llegasteis a hacer. Para el presupuesto que da miedo mirar. Para los proveedores que sí y los que no. Para los invitados, los regalos y la lista de mesas.</p>
+          <p>Y para el día de la boda, cuando ya no queda nada por organizar y solo falta <strong>estar presentes</strong>.</p>
+          <p>Imprimidlo, escribid a mano, pegad fotos. Es así como las cosas se quedan.</p>
+        </div>
+        <div class="org-capitulos-col">
+          <p class="org-cap-label">Seis capítulos</p>
+          <ul class="org-cap-list">
+            <li class="org-cap-item">
+              <span class="org-cap-num">01</span>
+              <div>
+                <div class="org-cap-name">El Universo Visual</div>
+                <div class="org-cap-detail">Manifiesto, moodboard y paleta de colores</div>
+              </div>
+            </li>
+            <li class="org-cap-item">
+              <span class="org-cap-num">02</span>
+              <div>
+                <div class="org-cap-name">El Presupuesto Consciente</div>
+                <div class="org-cap-detail">Tablas detalladas, filosofía de inversión y resumen</div>
+              </div>
+            </li>
+            <li class="org-cap-item">
+              <span class="org-cap-num">03</span>
+              <div>
+                <div class="org-cap-name">Los Proveedores con Alma</div>
+                <div class="org-cap-detail">Fichas de proveedor y guía de preguntas clave</div>
+              </div>
+            </li>
+            <li class="org-cap-item">
+              <span class="org-cap-num">04</span>
+              <div>
+                <div class="org-cap-name">Los Invitados y La Lista</div>
+                <div class="org-cap-detail">Lista de invitados, distribución de mesas y lista de regalos</div>
+              </div>
+            </li>
+            <li class="org-cap-item">
+              <span class="org-cap-num">05</span>
+              <div>
+                <div class="org-cap-name">El Calendario sin Prisas</div>
+                <div class="org-cap-detail">Planificador mes a mes, con un reto slow en cada etapa</div>
+              </div>
+            </li>
+            <li class="org-cap-item">
+              <span class="org-cap-num">06</span>
+              <div>
+                <div class="org-cap-name">El Día de la Boda</div>
+                <div class="org-cap-detail">Escaleta fluida y kit de supervivencia emocional</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Preview strip -->
+  <div class="org-preview">
+    <div class="org-preview-strip">
+      <div class="org-preview-img">
+        <img src="./organizador-portada.png" alt="Portada del Organizador de Bodas Slow" loading="lazy">
+      </div>
+      <div class="org-preview-img">
+        <img src="./organizador-cap01.png" alt="Capítulo 01 — El Universo Visual" loading="lazy">
+      </div>
+      <div class="org-preview-img">
+        <img src="./organizador-cap04.png" alt="Capítulo 04 — Los Invitados y La Lista" loading="lazy">
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA final -->
+  <section class="org-cta">
+    <div class="container">
+      <div class="org-cta-inner">
+        <h2>Organizad vuestro día <em>despacio</em>.</h2>
+        <p>Un cuaderno para que el camino hacia la boda sea tan bonito como el día en sí.</p>
+        <a href="https://buy.stripe.com/fZu9AT2253mq66igLI8Zq00" class="btn btn-primary">Comprar el Organizador — 7 €</a>
+        <p class="org-cta-meta">PDF · 44 páginas · Descarga inmediata tras el pago</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer mínimo -->
+  <footer style="padding: 2.5rem 4%; border-top: 1px solid var(--line-soft); display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; flex-wrap: wrap; gap: 1rem;">
+    <a href="./" style="color: var(--text-muted); text-decoration: none;">← La Lista Slow</a>
+    <span>lalistaslow.com</span>
+    <a href="./privacidad.html" style="color: var(--text-muted); text-decoration: none;">Privacidad</a>
+  </footer>
+
+  <script>
+    // Navbar scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('is-scrolled', window.scrollY > 40);
+    });
+  </script>
+</body>
+</html>
