@@ -67,6 +67,7 @@
                 <p class="lista-eyebrow">Lista de bodas</p>
                 <h1 class="lista-titulo" id="titulo-lista"></h1>
                 <p class="lista-fecha" id="fecha-lista"></p>
+                <p class="lista-intro" style="font-family:'Inter',sans-serif;font-size:0.95rem;line-height:1.6;color:var(--color-sand);max-width:520px;margin-top:20px;">Elegid lo que os apetezca. Y si os hace ilusión ir a medias con alguien, también podéis. Al reservar, escribid todos los nombres. Un regalo a varias manos sigue siendo un regalo.</p>
             </div>
             <div class="lista-grid" id="regalos-grid"></div>
         </div>
@@ -78,7 +79,8 @@
             <p class="modal-titulo">Me lo quedo</p>
             <p class="modal-sub" id="modal-reservar-nombre-regalo"></p>
             <label class="modal-label">Tu nombre</label>
-            <input class="modal-input" id="input-nombre" type="text" placeholder="Ana García" autocomplete="name">
+            <p style="font-family:'Inter',sans-serif;font-size:0.82rem;color:var(--color-sand);margin:-4px 0 10px;">Si vais en grupo, escribid todos los nombres aquí.</p>
+            <input class="modal-input" id="input-nombre" type="text" placeholder="Ana y Marcos García" autocomplete="name">
             <div class="modal-actions">
                 <button class="btn-modal-cancel" onclick="cerrarModal('modal-reservar')">Cancelar</button>
                 <button class="btn-modal-ok" onclick="confirmarReserva()">Confirmar</button>
