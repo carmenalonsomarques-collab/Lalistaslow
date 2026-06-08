@@ -258,6 +258,23 @@ a:hover { color: var(--accent); }
   line-height: 1.7;
 }
 
+.manifiesto-criterio {
+  font-size: 1rem;
+  color: var(--text) !important;
+  line-height: 1.7;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--line);
+  margin-top: 0.5rem;
+}
+
+.manifiesto-criterio em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+  letter-spacing: 0;
+}
+
 .manifiesto-cierre {
   font-family: var(--font-display);
   font-weight: 500;
@@ -496,6 +513,22 @@ h2.section-label {
 .cta-btn:hover {
   background: var(--accent);
   color: var(--bg);
+}
+
+.cta-link {
+  display: inline-block;
+  margin-top: 1.25rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-sec);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.25s, border-color 0.25s;
+}
+
+.cta-link:hover {
+  color: var(--accent);
+  border-color: var(--accent);
 }
 
 /* ── Footer ───────────────────────────────────────────────────────────── */
