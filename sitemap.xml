@@ -1,44 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-  <url>
-    <loc>https://lalistaslow.com/</loc>
-    <lastmod>2026-06-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-    <image:image>
-      <image:loc>https://lalistaslow.com/og-image.jpg</image:loc>
-      <image:title>La Lista Slow — Lista de bodas personalizada en Asturias</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://lalistaslow.com/tarta_web.jpg</image:loc>
-      <image:title>Lista de bodas personalizada — detalle de tarta nupcial</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://lalistaslow.com/asesoria_eventos.jpg</image:loc>
-      <image:title>Asesoría de eventos online en Asturias</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://lalistaslow.com/organizador.html</loc>
-    <lastmod>2026-06-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://lalistaslow.com/organizador-portada.png</image:loc>
-      <image:title>El Organizador de Bodas Slow — cuaderno descargable</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://lalistaslow.com/aviso-legal.html</loc>
-    <lastmod>2026-06-02</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://lalistaslow.com/privacidad.html</loc>
-    <lastmod>2026-06-02</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+   <url>
+      <loc>https://lalistaslow.com/</loc>
+      <lastmod>2026-06-29</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.0</priority>
+   </url>
 </urlset>

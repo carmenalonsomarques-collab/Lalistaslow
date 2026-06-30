@@ -169,7 +169,7 @@ function renderGifts() {
             </div>
             <div class="gift-content">
                 <h3 class="gift-title">${gift.title}</h3>
-                <a href="${gift.storeLink}" target="_blank" class="gift-link-btn" style="margin-bottom: 0.5rem;" onclick="event.stopPropagation()">${gift.storeInfo}</a>
+                <a href="${gift.storeLink}" target="_blank" rel="noopener" class="gift-link-btn" style="margin-bottom: 0.5rem;" onclick="event.stopPropagation()">${gift.storeInfo}</a>
                 <p class="gift-desc" style="font-size: 0.9rem; margin-bottom: 1.5rem;">${gift.description}</p>
                 <div style="margin-top: auto; padding-top: 10px;">
                     ${buttonHTML}
