@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>El consultorio — La Lista Slow</title>
+  <meta name="description" content="El consultorio de la newsletter de La Lista Slow. Una prenda, una mesa o un evento: me lo cuentas y te respondo yo.">
+  <meta name="theme-color" content="#FBF8F3">
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lalistaslow.com/consultorio.html">
+  <meta property="og:title" content="El consultorio de La Lista Slow">
+  <meta property="og:description" content="Pregúntame. Te respondo yo.">
+  <meta property="og:image" content="https://lalistaslow.com/og-image.jpg">
+  <meta property="og:locale" content="es_ES">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500&family=Instrument+Serif:ital@1&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --crema: #FBF8F3;
+      --lino: #F2EDE4;
+      --lino-2: #E9E2D6;
+      --marron: #1A1612;
+      --arena: #6B635D;
+      --linea: rgba(26, 22, 18, 0.12);
+      --terracota: #B24D3D;
+      --terracota-osc: #8C392A;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: var(--crema); color: var(--marron); }
+    body { font-family: 'Inter', system-ui, sans-serif; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+    button, input, textarea { font: inherit; color: inherit; }
+    button { background: none; border: 0; cursor: pointer; }
+    em { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: var(--terracota); }
+
+    .wrap { max-width: 640px; margin: 0 auto; padding: 0 20px; }
+
+    /* Cabecera */
+    .top { display: flex; justify-content: space-between; align-items: baseline; padding: 22px 0 18px; border-bottom: 1px solid var(--linea); }
+    .logo { font-family: 'Inter Tight', sans-serif; font-weight: 500; font-size: 18px; letter-spacing: -0.03em; text-decoration: none; }
+    .logo em { font-size: 21px; letter-spacing: 0; }
+    .eyebrow { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--arena); }
+
+    /* Intro */
+    .hero { padding: 48px 0 36px; }
+    .hero .eyebrow { display: block; margin-bottom: 18px; }
+    h1 { font-family: 'Inter Tight', sans-serif; font-weight: 500; font-size: clamp(38px, 9vw, 58px); letter-spacing: -0.04em; line-height: 1.02; }
+    h1 em { font-size: 1.1em; letter-spacing: -0.01em; }
+    .lead { font-size: 18px; line-height: 1.55; margin-top: 22px; max-width: 34em; }
+    .lead + .lead { margin-top: 12px; color: var(--arena); font-size: 16px; }
+
+    .steps { list-style: none; border-top: 1px solid var(--linea); margin-top: 8px; }
+    .steps li { display: grid; grid-template-columns: 52px 1fr; padding: 16px 0; border-bottom: 1px solid var(--linea); align-items: baseline; }
+    .steps .n { font-family: 'Instrument Serif', serif; font-style: italic; color: var(--terracota); font-size: 24px; line-height: 1; }
+    .steps b { font-weight: 500; }
+    .steps span { color: var(--arena); }
+
+    .offer { margin: 28px 0 0; padding: 18px 20px; background: var(--lino); font-size: 15px; line-height: 1.5; }
+    .offer b { font-weight: 500; }
+
+    /* Formulario */
+    form { padding: 44px 0 20px; }
+    .h2 { font-family: 'Inter Tight', sans-serif; font-weight: 500; font-size: 28px; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 6px; }
+    .h2 em { font-size: 1.1em; }
+    .field { margin-top: 28px; }
+    .label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 10px; }
+    .label small { font-weight: 400; color: var(--arena); margin-left: 4px; }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip { padding: 9px 16px; border-radius: 99px; border: 1px solid var(--linea); font-size: 14.5px; color: var(--arena); transition: all .15s; }
+    .chip:hover { border-color: var(--marron); color: var(--marron); }
+    .chip.on { background: var(--marron); border-color: var(--marron); color: var(--crema); }
+
+    .photos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .slot { aspect-ratio: 3 / 4; background: var(--lino); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .slot img { width: 100%; height: 100%; object-fit: cover; }
+    .slot .rm { position: absolute; top: 6px; right: 6px; width: 28px; height: 28px; border-radius: 50%; background: rgba(251,248,243,.92); color: var(--arena); font-size: 17px; line-height: 1; }
+    .slot.add { border: 1px dashed rgba(26,22,18,.3); background: transparent; flex-direction: column; gap: 2px; color: var(--arena); font-size: 13px; cursor: pointer; text-align: center; padding: 8px; }
+    .slot.add .plus { font-family: 'Inter Tight', sans-serif; font-size: 32px; line-height: 1; color: var(--terracota); }
+    .slot.add:hover { border-color: var(--marron); }
+    .hint { font-size: 13px; color: var(--arena); margin-top: 8px; }
+
+    .input, textarea {
+      width: 100%; border: 1px solid var(--linea); background: #fff; padding: 13px 14px; font-size: 16px; outline: none; border-radius: 0;
+    }
+    .input:focus, textarea:focus { border-color: var(--marron); }
+    textarea { min-height: 112px; resize: vertical; line-height: 1.5; }
+    .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+    .check { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; color: var(--arena); margin-top: 26px; cursor: pointer; }
+    .check input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--terracota); flex: 0 0 auto; }
+    .check a { text-underline-offset: 3px; }
+
+    .send {
+      width: 100%; margin-top: 26px; min-height: 54px; border-radius: 99px;
+      background: var(--terracota); color: #fff; font-weight: 500; font-size: 16px; transition: background .15s;
+    }
+    .send:hover { background: var(--terracota-osc); }
+    .send[disabled] { opacity: .5; pointer-events: none; }
+    .error { color: var(--terracota-osc); font-size: 14px; margin-top: 12px; min-height: 1.4em; }
+
+    /* Gracias */
+    .done { display: none; padding: 56px 0 40px; }
+    .done.on { display: block; }
+    .done p { font-size: 18px; margin-top: 18px; max-width: 30em; }
+    .done .sign { font-family: 'Instrument Serif', serif; font-style: italic; color: var(--terracota); font-size: 26px; margin-top: 22px; }
+    .closed { display: none; }
+    body.is-closed .closed { display: block; }
+    body.is-closed form, body.is-closed .offer { display: none; }
+
+    footer { border-top: 1px solid var(--linea); margin-top: 40px; padding: 22px 0 calc(28px + env(safe-area-inset-bottom)); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--arena); }
+    footer a { text-decoration: none; }
+    footer a:hover { color: var(--terracota); }
+
+    @media (max-width: 420px) {
+      .row2 { grid-template-columns: 1fr; }
+      .hero { padding-top: 36px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <a class="logo" href="https://substack.com/@lalistaslow">La Lista <em>Slow</em></a>
+      <span class="eyebrow">El consultorio</span>
+    </header>
+
+    <section class="hero">
+      <span class="eyebrow">De la newsletter</span>
+      <h1>Pregúntame. Te respondo <em>yo</em>.</h1>
+      <p class="lead">Esa falda que no sabes con qué ponerte. La mesa de Nochebuena. El cumpleaños de tu hija y dónde comprar la decoración sin acabar en lo de siempre.</p>
+      <p class="lead">Me lo cuentas, con una foto si la tienes, y te respondo con ideas pensadas para ti. Y dónde encontrar lo que te falte.</p>
+      <p class="lead">Algunas consultas, si me dejas, saldrán en la siguiente edición. Sin tu nombre.</p>
+
+      <ol class="steps" style="margin-top:30px">
+        <li><span class="n">01</span><div><b>Cuéntame qué tienes entre manos.</b> <span>Una prenda, una mesa o un evento.</span></div></li>
+        <li><span class="n">02</span><div><b>Mándame una foto si la tienes.</b> <span>Vale una captura.</span></div></li>
+        <li><span class="n">03</span><div><b>Te respondo por email.</b> <span>En un par de días.</span></div></li>
+      </ol>
+
+      <p class="offer closed"><b>El consultorio está cerrado unos días.</b> Me han llegado muchas y quiero responder bien a todas. Vuelve pronto.</p>
+    </section>
+
+    <form id="form" novalidate>
+      <h2 class="h2">Tu <em>consulta</em></h2>
+
+      <div class="field">
+        <span class="label">¿Sobre qué es?</span>
+        <div class="chips" data-name="tipo">
+          <button type="button" class="chip on" data-v="Ropa">Una prenda</button>
+          <button type="button" class="chip" data-v="Mesa">Una mesa</button>
+          <button type="button" class="chip" data-v="Evento">Un evento</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <span class="label">Fotos <small id="photoSmall">hasta tres</small></span>
+        <div class="photos" id="photos"></div>
+        <p class="hint" id="photoHint">La prenda que quieres combinar. Si tienes alguna idea de con qué, mándala también.</p>
+        <input type="file" id="file" accept="image/*" multiple hidden>
+      </div>
+
+      <div class="field">
+        <span class="label">¿Para cuándo?</span>
+        <div class="chips" data-name="ocasion">
+          <button type="button" class="chip" data-v="Navidad">Navidad</button>
+          <button type="button" class="chip" data-v="Boda">Una boda</button>
+          <button type="button" class="chip" data-v="Cumpleaños">Un cumpleaños</button>
+          <button type="button" class="chip" data-v="Cena">Una cena</button>
+          <button type="button" class="chip" data-v="Comida">Una comida</button>
+          <button type="button" class="chip" data-v="Día a día">El día a día</button>
+          <button type="button" class="chip" data-v="Otra">Otra cosa</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label" for="msg">Cuéntame un poco</label>
+        <textarea id="msg" maxlength="800" placeholder="Comida de boda en mayo, de día. No quiero ir de negro."></textarea>
+      </div>
+
+      <div class="field row2">
+        <div>
+          <label class="label" for="nombre">Tu nombre</label>
+          <input class="input" id="nombre" autocomplete="given-name" maxlength="80">
+        </div>
+        <div>
+          <label class="label" for="email">Tu email</label>
+          <input class="input" id="email" type="email" autocomplete="email" maxlength="120" placeholder="Para responderte">
+        </div>
+      </div>
+
+      <label class="check">
+        <input type="checkbox" id="publicar">
+        <span>Puedes contar mi consulta en la newsletter, con mis fotos y sin mi nombre.</span>
+      </label>
+
+      <label class="check" style="margin-top:14px">
+        <input type="checkbox" id="ok">
+        <span>Acepto que uses mis datos y mis fotos para responderme. Las fotos solo salen en la newsletter si marco la casilla de arriba. <a href="./privacidad.html" target="_blank">Privacidad</a></span>
+      </label>
+
+      <button class="send" id="send" type="submit">Enviar mi consulta</button>
+      <p class="error" id="error" role="alert"></p>
+    </form>
+
+    <section class="done" id="done">
+      <h1>Recibido.</h1>
+      <p>Te escribo en un par de días. Mira tu bandeja de entrada, y por si acaso también la de promociones.</p>
+      <p>Mientras, no compres nada todavía.</p>
+      <p class="sign">Carmen</p>
+      <a class="send" style="display:flex;align-items:center;justify-content:center;text-decoration:none;margin-top:36px" href="https://substack.com/@lalistaslow">Leer la newsletter</a>
+    </section>
+
+    <footer>
+      <a href="https://substack.com/@lalistaslow">La newsletter</a>
+      <a href="https://www.instagram.com/lalistaslow/">Instagram</a>
+      <a href="./privacidad.html">Privacidad</a>
+    </footer>
+  </div>
+
+<script>
+  /* Para cerrar el consultorio unos días si llegan demasiadas: cambia a true y publica. */
+  const CERRADO = false;
+  if (CERRADO) document.body.classList.add('is-closed');
+
+  const state = { tipo: 'Ropa', ocasion: '', fotos: [] };
+  const TEXTOS = {
+    Ropa: { hint: 'La prenda que quieres combinar. Si tienes alguna idea de con qué, mándala también.',
+            placeholder: 'Comida de boda en mayo, de día. No quiero ir de negro.' },
+    Mesa: { hint: 'El mantel, la vajilla o lo que tengas. Si puedes, también una foto de la mesa o del sitio.',
+            placeholder: 'Cena de Nochebuena, somos ocho. Tengo este mantel y vajilla blanca.' },
+    Evento: { hint: 'Fotos del sitio o de algo que te guste. Si no tienes, no pasa nada.',
+              placeholder: 'Cumpleaños de mi hija, cumple seis. En casa, unos quince niños. No sé dónde comprar la decoración.' }
+  };
+  const MAX = 3;
+
+  // Chips
+  document.querySelectorAll('.chips').forEach(group => {
+    group.addEventListener('click', e => {
+      const b = e.target.closest('.chip'); if (!b) return;
+      group.querySelectorAll('.chip').forEach(c => c.classList.toggle('on', c === b));
+      state[group.dataset.name] = b.dataset.v;
+      if (group.dataset.name === 'tipo') {
+        const T = TEXTOS[b.dataset.v];
+        document.getElementById('photoHint').textContent = T.hint;
+        document.getElementById('msg').placeholder = T.placeholder;
+        document.getElementById('photoSmall').textContent = b.dataset.v === 'Evento' ? 'si tienes, hasta tres' : 'hasta tres';
+      }
+    });
+  });
+
+  // Fotos: se reducen en el móvil antes de enviarse
+  const fileInput = document.getElementById('file');
+  function renderPhotos() {
+    const el = document.getElementById('photos');
+    el.innerHTML = state.fotos.map((f, i) => `<div class="slot"><img src="${f.url}" alt=""><button type="button" class="rm" aria-label="Quitar foto" data-i="${i}">×</button></div>`).join('')
+      + (state.fotos.length < MAX ? `<button type="button" class="slot add" id="addPhoto"><span class="plus">+</span>Añadir foto</button>` : '');
+    const add = document.getElementById('addPhoto');
+    if (add) add.onclick = () => fileInput.click();
+    el.querySelectorAll('.rm').forEach(b => b.onclick = () => { state.fotos.splice(+b.dataset.i, 1); renderPhotos(); });
+  }
+  function shrink(file) {
+    return new Promise((ok, ko) => {
+      const r = new FileReader();
+      r.onload = () => {
+        const im = new Image();
+        im.onload = () => {
+          const s = Math.min(1, 1400 / Math.max(im.width, im.height));
+          const c = document.createElement('canvas');
+          c.width = Math.round(im.width * s); c.height = Math.round(im.height * s);
+          const ctx = c.getContext('2d');
+          ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, c.width, c.height);
+          ctx.drawImage(im, 0, 0, c.width, c.height);
+          ok({ url: c.toDataURL('image/jpeg', 0.82) });
+        };
+        im.onerror = ko;
+        im.src = r.result;
+      };
+      r.onerror = ko;
+      r.readAsDataURL(file);
+    });
+  }
+  fileInput.addEventListener('change', async () => {
+    const files = [...fileInput.files].slice(0, MAX - state.fotos.length);
+    for (const f of files) { try { state.fotos.push(await shrink(f)); } catch (e) { showError('Esa foto no se ha podido leer. Prueba con otra.'); } }
+    fileInput.value = '';
+    renderPhotos();
+  });
+  renderPhotos();
+
+  // Envío
+  const showError = msg => { document.getElementById('error').textContent = msg; };
+  document.getElementById('form').addEventListener('submit', async e => {
+    e.preventDefault();
+    showError('');
+    const nombre = document.getElementById('nombre').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const mensaje = document.getElementById('msg').value.trim();
+    if (!state.fotos.length && state.tipo !== 'Evento') return showError('Falta la foto. Sin ver la prenda o la mesa no puedo ayudarte.');
+    if (state.tipo === 'Evento' && !mensaje) return showError('Cuéntame un poco el evento.');
+    if (!state.ocasion) return showError('Dime para cuándo es.');
+    if (!nombre) return showError('Falta tu nombre.');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showError('Revisa el email. Es por donde te voy a responder.');
+    if (!document.getElementById('ok').checked) return showError('Marca la casilla de las fotos para poder enviarla.');
+
+    const btn = document.getElementById('send');
+    btn.disabled = true; btn.textContent = 'Enviando…';
+    try {
+      const res = await fetch('/api/consulta', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tipo: state.tipo, ocasion: state.ocasion, mensaje, nombre, email, publicar: document.getElementById('publicar').checked, fotos: state.fotos.map(f => f.url) })
+      });
+      if (!res.ok) throw new Error(res.status);
+      document.getElementById('form').style.display = 'none';
+      document.getElementById('done').classList.add('on');
+      window.scrollTo({ top: document.getElementById('done').offsetTop - 20, behavior: 'smooth' });
+    } catch (err) {
+      showError('No se ha podido enviar. Prueba otra vez o escríbeme a lalistaslow@gmail.com.');
+      btn.disabled = false; btn.textContent = 'Enviar mi consulta';
+    }
+  });
+</script>
+</body>
+</html>
